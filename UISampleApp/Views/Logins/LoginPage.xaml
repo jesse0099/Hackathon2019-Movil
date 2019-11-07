@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="UISampleApp.Logins.LoginPage"
+             xmlns:local="clr-namespace:UISampleApp.Effects"
+             xmlns:controls="clr-namespace:UISampleApp.Controls" 
+             >
+    <ContentPage.Resources>
+         <ResourceDictionary>
+            <Color x:Key="primary">#1DB954</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+	<ContentPage.Content>
+        <ScrollView VerticalOptions="FillAndExpand">
+            <Grid  BackgroundColor="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label HeightRequest="110"  Grid.Row="0"
+                          VerticalOptions="Start"
+                          HorizontalOptions="FillAndExpand" 
+                          Text="DevSocket" 
+                          BackgroundColor="{StaticResource primary}"
+                          TextColor="Black" 
+                          FontSize="40" 
+                          HorizontalTextAlignment="Center"
+                          VerticalTextAlignment="Center"/>
+                <StackLayout Grid.Row="1" VerticalOptions="CenterAndExpand">
+                    <controls:ImageEntry TextColor="Black" 
+                        FontSize="Small"
+                        Margin="20,0,20,0"
+                        PlaceholderColor="{StaticResource primary}" 
+                        Image="user96" 
+                        Placeholder="Email" 
+                        HorizontalOptions="FillAndExpand"/>
+
+                    <controls:ImageEntry TextColor="Black" 
+                    FontSize="Small"                     
+                    Margin="20,0,20,0"                 
+                    IsPassword="True"
+                    PlaceholderColor="{StaticResource primary}"  
+                    Image="pass" 
+                    Placeholder="Password" 
+                    HorizontalOptions="FillAndExpand"/>
+                    <Button Margin="20,0,20,0" 
+                         Clicked="Button_Clicked"
+                         FontSize="Small"
+                         HeightRequest="40"
+                         CornerRadius="20"
+                         TextColor="White" 
+                         Text="Login"  
+                         BackgroundColor="{StaticResource primary}"
+                         HorizontalOptions="FillAndExpand"/>
+
+                    <Button Margin="20,0,20,0" 
+                         CornerRadius="20"
+                         FontSize="Small"
+                         HeightRequest="40" 
+                         TextColor="White" 
+                         Text="Registrarme"  Clicked="Handle_Clicked"
+                         BackgroundColor="#828282"
+                         HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Grid.Row="2">
+                    <Label 
+                        Margin="0,40,0,0"
+                        Text="Olvidé mi contraseña" 
+                        HorizontalOptions="Center" 
+                        TextColor="{StaticResource primary}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+	</ContentPage.Content>
+</ContentPage>

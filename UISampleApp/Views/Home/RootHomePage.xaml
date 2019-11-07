@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:fax="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
+            x:Class="UISampleApp.Views.Home.RootHomePage"
+            BarBackgroundColor="#0d0937"
+            BarTextColor="White"
+            SelectedTabColor="#828282"
+            SelectedItem="1"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:system="clr-namespace:System;assembly=System.Runtime"
+            xmlns:models="clr-namespace:UISampleApp.Models"
+            android:TabbedPage.IsSmoothScrollEnabled="True"
+            android:TabbedPage.IsSwipePagingEnabled="True"
+            >
+  <!--Pages can be added as references or inline-->
+    <ContentPage Title="Perfil"  IconImageSource="user96.png" Visual="Material">
+        <ScrollView>
+            <Grid ColumnSpacing="0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                </Grid.RowDefinitions>
+
+               
+                <Image Aspect="AspectFill" Source="HeaderBackground.png" />
+                <Image Aspect="Fill" Margin="0,-1,0,-1" Source="CurvedMask.png" VerticalOptions="End" />
+                
+                <StackLayout>
+                    <Frame CornerRadius="100" 
+                       HeightRequest="200"
+                       WidthRequest="200"
+                       HorizontalOptions="Center"
+                       Padding="0"
+                       IsClippedToBounds="True">
+                           <Image Source="ProfilePic.jpg" 
+                           Aspect="Fill"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                    </Frame>
+                </StackLayout>
+
+                <!--  Profile Name  -->
+                <StackLayout Grid.Row="1" Padding="0,50,0,00" HorizontalOptions="Center">
+                    <Label Style="{StaticResource ProfileNameLabel}" Text="Gerald solano" />
+                    <Label Margin="0,-5" Style="{StaticResource ProfileTagLabel}" Text="chupame_la_katur@gmail.com" />
+                </StackLayout>
+
+                <!--  Social Stats Section  -->
+                <Grid Grid.Row="2" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout>
+                        <Label Style="{StaticResource StatsNumberLabel}" Text="33" />
+                        <Label Style="{StaticResource StatsCaptionLabel}" Text="Compras realizadas" />
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1">
+                        <Label Style="{StaticResource StatsNumberLabel}" Text="94" />
+                        <Label Style="{StaticResource StatsCaptionLabel}" Text="Pendientes" />
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="2">
+                        <Label Style="{StaticResource StatsNumberLabel}" Text="$957" />
+                        <Label Style="{StaticResource StatsCaptionLabel}" Text="Consumido" />
+                    </StackLayout>
+                </Grid>
+
+               
+                <StackLayout Orientation="Vertical" Grid.Row="3"   HorizontalOptions="CenterAndExpand" >
+                    <Label Margin="20,0,0,40" VerticalOptions="Start" HorizontalOptions="Center" Grid.Row="3" Style="{StaticResource MainBodyLabel}" Text="Bienvenido Gerald !" />
+                    <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                        <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Body" Text="Nombre : "></Label>
+                            <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Small" Text="Gerald"></Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Body" Text="Apellido: "></Label>
+                            <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Small" Text="Solano"></Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Body" Text="Fecha de registro : "></Label>
+                            <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Small" x:Name="lblDateRegistered"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <Button  Grid.Row="4" Margin="20" Style="{StaticResource FollowButton}" Text="Actualizar perfil" Clicked="Button_Clicked"/>
+                
+            </Grid>
+        </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Explorar"   IconImageSource="search96.png" Visual="Material" >
+        <ContentPage.Resources>
+            <ResourceDictionary>
+                <models:Categorias x:Key="Categorias"></models:Categorias>
+                <DataTemplate x:Key="ListViewCategoriesTemplate">
+                    <ViewCell  >
+
+                            <Frame    Margin="5,5,5,5" Padding="2" CornerRadius="10" HasShadow="True">
+                            <AbsoluteLayout IsClippedToBounds="False">
+                                <StackLayout  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"  Orientation="Vertical">
+                                    <Image  Source="{Binding Portada}" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1" AbsoluteLayout.LayoutFlags="All" Aspect="AspectFill" HeightRequest="150"   HorizontalOptions="FillAndExpand"  />
+                                    <StackLayout  Orientation="Vertical" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,0.2" AbsoluteLayout.LayoutFlags="PositionProportional">
+                                        <Label TextColor="#0d0937" HorizontalOptions="Start" Text="{Binding NombreCategoria}" FontSize="Medium"></Label>
+                                        <StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                <Label TextColor="DarkGray" Text="Vendedores : " FontSize="Small"></Label>
+                                                <Label TextColor="DarkGray" HorizontalOptions="Start"  Text="{Binding Vendedores}" FontSize="Small"></Label>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                                <fax:FloatingActionButton         
+                                                                  AbsoluteLayout.LayoutFlags="YProportional,XProportional" 
+                                                                  AbsoluteLayout.LayoutBounds="1,1"
+                                                                  WidthRequest="56"
+                                                                  HeightRequest="56"
+                                                                  ButtonColor="{StaticResource ButtonBackgroundColor}"
+                                                                  ImageSource="Go96.png"
+                                                                  HorizontalOptions="EndAndExpand">
+                                </fax:FloatingActionButton>
+                            </AbsoluteLayout>
+                        </Frame>
+
+                    </ViewCell>
+                </DataTemplate>
+            </ResourceDictionary>
+        </ContentPage.Resources>
+        <ScrollView BindingContext="{Binding Source={StaticResource Categorias}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout>
+                <Frame CornerRadius="20" Margin="5,5,5,5" HeightRequest="25">
+                    <SearchBar Placeholder="Restaurantes" >
+
+                    </SearchBar>
+                </Frame>
+                <ListView  BackgroundColor="White"  SelectionMode="None"  ItemTemplate="{StaticResource ListViewCategoriesTemplate}"
+                  ItemsSource="{Binding CategoriasList,Mode=TwoWay}" 
+                  VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"
+                  SelectedItem="{Binding CategoriaSeleccionada,Mode=TwoWay}"
+                      HasUnevenRows="True">
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Historial" IconImageSource="chart96.png" Visual="Material"/>
+</TabbedPage>

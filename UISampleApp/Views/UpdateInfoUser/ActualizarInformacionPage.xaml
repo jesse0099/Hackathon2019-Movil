@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UISampleApp.Views.UpdateInfoUser.ActualizarInformacion">
+    <ScrollView BackgroundColor="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Orientation="Vertical"  Margin="0,15,0,0">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="btnImg" Tapped="BtnImg_Tapped"></TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
+                <StackLayout>
+                    <ActivityIndicator x:Name="aicImageLoad" IsRunning="False" ></ActivityIndicator>
+                    <Frame CornerRadius="100" 
+                       HeightRequest="200"
+                       WidthRequest="200"
+                       HorizontalOptions="Center"
+                       Padding="0"
+                       IsClippedToBounds="True">
+                        <Image x:Name="imgProfile" Source="ProfilePic.jpg" 
+                           Aspect="Fill"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+            
+            <Grid Grid.Row="1"  HorizontalOptions="FillAndExpand" Padding="0,0,0,0" Margin="20,20,20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent" Source="DarkBlueUser96.png" HeightRequest="16" WidthRequest="16" HorizontalOptions="Start"></Image>
+                    <Entry Grid.Row="0" Grid.Column="1"  Placeholder="Nombre" HorizontalOptions="FillAndExpand"></Entry>
+
+                    <Image Grid.Row="1" Grid.Column="0" BackgroundColor="Transparent" Source="DarkBlueUser96.png" HeightRequest="16" WidthRequest="16" HorizontalOptions="Start"></Image>
+                    <Entry Grid.Row="1" Grid.Column="1"  Placeholder="Apellido" HorizontalOptions="FillAndExpand"></Entry>
+
+
+                    <Image Grid.Row="2" Grid.Column="0" BackgroundColor="Transparent" Source="DarkBluemail96.png" HeightRequest="16" WidthRequest="16" HorizontalOptions="Start"></Image>
+                    <Entry Grid.Row="2" Grid.Column="1"  Placeholder="user@gmail.com" HorizontalOptions="FillAndExpand"></Entry>
+
+                    <Image Grid.Row="3" Grid.Column="0" BackgroundColor="Transparent" Source="DarkBluePass96.png" HeightRequest="16" WidthRequest="16" HorizontalOptions="Start"></Image>
+                    <Entry Grid.Row="3" Grid.Column="1" IsPassword="True" Placeholder="Antigua Contraseña" HorizontalOptions="FillAndExpand"></Entry>
+
+                    <Image Grid.Row="4" Grid.Column="0" BackgroundColor="Transparent" Source="DarkBluePass96.png" HeightRequest="16" WidthRequest="16" HorizontalOptions="Start"></Image>
+                    <Entry  Grid.Row="4" Grid.Column="1" IsPassword="True" Placeholder="Nueva Contraseña" HorizontalOptions="FillAndExpand"></Entry>
+                    
+            </Grid>
+        
+            <Button  Grid.Row="2" Margin="20,0,20,20" Style="{StaticResource FollowButton}" Text="Actualizar perfil"/>
+       
+        </Grid>
+    </ScrollView>
+</ContentPage>
