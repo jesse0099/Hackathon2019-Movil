@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
+using UISampleApp.Models;
 
-namespace UISampleApp.Models
+namespace UISampleApp.ViewModels
 {
-    public class Categorias : NotificationObject
+    public class RootExplorePageViewModel : NotificationObject
     {
         private ObservableCollection<Categoria> categoriaslist;
 
@@ -17,13 +20,13 @@ namespace UISampleApp.Models
             set
             {
                 categoriaslist = value;
-                onPropertyChanged();
+               // onPropertyChanged();
             }
 
         }
-        private string categoriaSeleccionada;
+        private Categoria categoriaSeleccionada;
 
-        public string CategoriaSeleccionada
+        public Categoria CategoriaSeleccionada
         {
             get { return categoriaSeleccionada; }
             set { categoriaSeleccionada = value;
@@ -32,15 +35,26 @@ namespace UISampleApp.Models
         }
 
 
-        public Categorias()
+        public RootExplorePageViewModel()
         {
+
+            //Reconociendo seleccion
+            PropertyChanged += RootExplorePageViewModel_PropertyChanged;
+
             //Valores de testeo
             CategoriasList = new ObservableCollection<Categoria>();
             CategoriasList.Add(new Categoria(){ NombreCategoria="Farmacias",Vendedores=89,Portada="Drugs.png"});
             CategoriasList.Add(new Categoria(){ NombreCategoria="Restaurantes",Vendedores=79,Portada="restaurant.png"});
             CategoriasList.Add(new Categoria(){ NombreCategoria="Electronicos",Vendedores=29,Portada="Elec.png"});
+
         }
 
-
+        private void RootExplorePageViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+           if(e.PropertyName == nameof(CategoriaSeleccionada))
+            {
+                    MessagingCenter.Send(this,"Goto");
+            }
+        }
     }
 }

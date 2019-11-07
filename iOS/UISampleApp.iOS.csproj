@@ -100,21 +100,6 @@
     <Reference Include="SuaveControls.FloatingActionButton.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SuaveControls.FloatingActionButton.2017.10.17\lib\xamarinios10\SuaveControls.FloatingActionButton.iOS.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Core.XForms, Version=17.3451.0.19, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Xamarin.Core.17.3.0.19\lib\Xamarin.iOS10\Syncfusion.Core.XForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Core.XForms.iOS, Version=17.3451.0.19, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Xamarin.Core.17.3.0.19\lib\Xamarin.iOS10\Syncfusion.Core.XForms.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Licensing, Version=17.3.0.19, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Licensing.17.3.0.19\lib\Xamarin.iOS10\Syncfusion.Licensing.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfBadgeView.XForms, Version=17.3451.0.19, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Xamarin.SfBadgeView.17.3.0.19\lib\Xamarin.iOS10\Syncfusion.SfBadgeView.XForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfBadgeView.XForms.iOS, Version=17.3451.0.19, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Xamarin.SfBadgeView.17.3.0.19\lib\Xamarin.iOS10\Syncfusion.SfBadgeView.XForms.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />

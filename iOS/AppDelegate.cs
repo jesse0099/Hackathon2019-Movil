@@ -1,5 +1,4 @@
-using Syncfusion.XForms.iOS.BadgeView;
-using Syncfusion.XForms.iOS.Core;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +14,7 @@ namespace UISampleApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
 global::Xamarin.Forms.Forms.Init();
-SfBadgeViewRenderer.Init();
-SfAvatarViewRenderer.Init();
+
 
             LoadApplication(new App());
 

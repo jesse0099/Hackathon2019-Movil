@@ -9,7 +9,7 @@
             SelectedItem="1"
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             xmlns:system="clr-namespace:System;assembly=System.Runtime"
-            xmlns:models="clr-namespace:UISampleApp.Models"
+            xmlns:viewmodels="clr-namespace:UISampleApp.ViewModels"
             android:TabbedPage.IsSmoothScrollEnabled="True"
             android:TabbedPage.IsSwipePagingEnabled="True"
             >
@@ -102,7 +102,8 @@
     <ContentPage Title="Explorar"   IconImageSource="search96.png" Visual="Material" >
         <ContentPage.Resources>
             <ResourceDictionary>
-                <models:Categorias x:Key="Categorias"></models:Categorias>
+                <!--Instanciando el view model-->
+                
                 <DataTemplate x:Key="ListViewCategoriesTemplate">
                     <ViewCell  >
 
@@ -137,17 +138,20 @@
                 </DataTemplate>
             </ResourceDictionary>
         </ContentPage.Resources>
-        <ScrollView BindingContext="{Binding Source={StaticResource Categorias}}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <ScrollView  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <ScrollView.BindingContext>
+                <viewmodels:RootExplorePageViewModel></viewmodels:RootExplorePageViewModel>
+            </ScrollView.BindingContext>
             <StackLayout>
                 <Frame CornerRadius="20" Margin="5,5,5,5" HeightRequest="25">
                     <SearchBar Placeholder="Restaurantes" >
 
                     </SearchBar>
                 </Frame>
-                <ListView  BackgroundColor="White"  SelectionMode="None"  ItemTemplate="{StaticResource ListViewCategoriesTemplate}"
+                <ListView x:Name="lstCats" BackgroundColor="White" SelectionMode="Single"  ItemTemplate="{StaticResource ListViewCategoriesTemplate}"
                   ItemsSource="{Binding CategoriasList,Mode=TwoWay}" 
                   VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"
-                  SelectedItem="{Binding CategoriaSeleccionada,Mode=TwoWay}"
+                  SelectedItem="{Binding CategoriaSeleccionada ,Mode=TwoWay}"
                       HasUnevenRows="True">
                 </ListView>
             </StackLayout>
