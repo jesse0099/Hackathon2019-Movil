@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Empresa.cs" />
+    <Compile Include="Models\RatingConverter.cs" />
     <Compile Include="ViewModels\EnterprisePageViewModel.cs" />
     <Compile Include="ViewModels\RootExplorePageViewModel.cs" />
     <Compile Include="Models\NotificationObject.cs" />
