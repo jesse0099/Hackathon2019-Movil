@@ -145,6 +145,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Effects\iOSBackgroundEntryEffect.cs" />
     <Compile Include="Renderers\ImageEntryRenderer.cs" />
+    <Compile Include="Renderers\MySliderRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\email.png" />

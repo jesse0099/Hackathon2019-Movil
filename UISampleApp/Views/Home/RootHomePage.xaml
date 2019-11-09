@@ -2,12 +2,13 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:fax="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
+            xmlns:localControl="clr-namespace:UISampleApp.Controls"
             x:Class="UISampleApp.Views.Home.RootHomePage"
             BarBackgroundColor="#0d0937"
             BarTextColor="White"
             SelectedTabColor="#828282"
             SelectedItem="1"
-             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             xmlns:system="clr-namespace:System;assembly=System.Runtime"
             xmlns:viewmodels="clr-namespace:UISampleApp.ViewModels"
             android:TabbedPage.IsSmoothScrollEnabled="True"
@@ -103,7 +104,6 @@
         <ContentPage.Resources>
             <ResourceDictionary>
                 <!--Instanciando el view model-->
-                
                 <DataTemplate x:Key="ListViewCategoriesTemplate">
                     <ViewCell  >
 
@@ -138,11 +138,11 @@
                 </DataTemplate>
             </ResourceDictionary>
         </ContentPage.Resources>
-        <ScrollView  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <ScrollView  VerticalOptions="FillAndExpand" >
             <ScrollView.BindingContext>
                 <viewmodels:RootExplorePageViewModel></viewmodels:RootExplorePageViewModel>
             </ScrollView.BindingContext>
-            <StackLayout>
+            <StackLayout HorizontalOptions="Fill">
                 <Frame CornerRadius="20" Margin="5,5,5,5" HeightRequest="25">
                     <SearchBar Placeholder="Restaurantes" >
 
@@ -157,5 +157,172 @@
             </StackLayout>
         </ScrollView>
     </ContentPage>
-    <ContentPage Title="Historial" IconImageSource="chart96.png" Visual="Material"/>
+    
+    <TabbedPage x:Name="historial" Title="Historial" 
+                IconImageSource="chart96.png" 
+                xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+                SelectedTabColor="#828282"
+                BarBackgroundColor="White"
+                BarTextColor="Black"
+                SelectedItem="1"
+                
+                >
+        <!--Copiar comportamiento de uber para el historial-->
+        <ContentPage Title="Detalle"   Visual="Material"  
+                     xmlns:localViewModels="clr-namespace:UISampleApp.ViewModels">
+            <ContentPage.Resources>
+                <localViewModels:HistoricPageViewModel x:Key="lstOrdersContext"></localViewModels:HistoricPageViewModel>
+            </ContentPage.Resources>
+            <ScrollView>
+                <StackLayout Orientation="Vertical">
+                    <ListView BindingContext="{StaticResource lstOrdersContext}"
+                          ItemsSource="{Binding Ordenes}"
+                          HasUnevenRows="True"
+                              SeparatorVisibility="None"
+                              SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate >
+                                <ViewCell>
+                                    <Grid Margin="5,2,5,4">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="120"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="100"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <!--imagen con texto sobrepuesto-->
+                                        <Grid Grid.Row="0" Grid.Column="0" RowSpacing="0" HeightRequest="110">
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="150"></RowDefinition>
+                                            </Grid.RowDefinitions>
+
+
+                                            <Image Grid.Row="0" 
+                                               Aspect="AspectFill"
+                                               IsOpaque="True"
+                                               Grid.Column="0"
+                                               BackgroundColor="Transparent"
+                                               Source="isoHist.png"></Image>
+
+                                            <Label Grid.Row="0"
+                                               FontSize="Large"
+                                               FontAttributes="Bold"
+                                               TextColor="#0d0937"
+                                               Text="{Binding Vendedor,Mode=OneWay}"
+                                               Grid.Column="0"
+                                               HorizontalOptions="CenterAndExpand"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalTextAlignment="Start"
+                                               VerticalTextAlignment="Center"></Label>
+                                        </Grid>
+                                        <!--Informacion general de la orden-->
+                                        <StackLayout Grid.Row="1" Margin="0,6,0,4" Orientation="Horizontal">
+                                            <!--Orden entregadas-->
+                                            <Image Source="orderCheck.png"
+                                               WidthRequest="16"
+                                               HeightRequest="16"></Image>
+                                            <Label FontSize="Small"
+                                               TextColor="Black"
+                                               Text="orden entregada"></Label>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="0" Grid.Row="2" Orientation="Vertical">
+                                            <Label Text="{Binding Ordenada}"
+                                               FontSize="Micro"
+                                               Margin="5,0,0,0"    
+                                               TextColor="LightGray"></Label>
+                                            <Label Text="{Binding ID,StringFormat='# {0}'}"
+                                               FontSize="Micro"
+                                               Margin="5,0,0,0"
+                                               TextColor="LightGray"></Label>
+                                            <BoxView Color="LightGray" HorizontalOptions="FillAndExpand" HeightRequest="1"></BoxView>
+                                        </StackLayout>
+                                        <ScrollView Grid.Column="0"  Grid.Row="3">
+                                            <ListView ItemsSource="{Binding  Items}"
+                                                  HasUnevenRows="True"
+                                                  SeparatorVisibility="None"
+                                                  SelectionMode="None">
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <ViewCell>
+                                                            <StackLayout Orientation="Horizontal">
+                                                                <!--Items de la orden-->
+                                                                <Grid RowSpacing="0">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Frame CornerRadius="4"
+                                                                       VerticalOptions="Center"
+                                                                       HasShadow="True"
+                                                                       Grid.Row="0"
+                                                                       Grid.Column="0"
+                                                                       BorderColor="LightGray"
+                                                                       BackgroundColor="Transparent">
+                                                                    </Frame>
+                                                                    <Label Grid.Row="0" 
+                                                                            HorizontalOptions="Center"
+                                                                            VerticalOptions="Center"
+                                                                            HorizontalTextAlignment="Center"
+                                                                            VerticalTextAlignment="Center"
+                                                                            Grid.Column="0"
+                                                                            FontSize="Small"
+                                                                            TextColor="DarkGray"
+                                                                            Text="{Binding Cantidad}"></Label>
+                                                                </Grid>
+                                                                <!--Nombre del item-->
+                                                                <Label Text="{Binding NombreItem}"
+                                                                        FontSize="Small"
+                                                                        Margin="5,0,0,0"
+                                                                        HorizontalOptions="Center"
+                                                                        VerticalOptions="Center">
+                                                                </Label>
+                                                            </StackLayout>
+                                                        </ViewCell>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+                                        </ScrollView>
+                                        <BoxView Grid.Column="0" Grid.Row="4" Color="LightGray" HorizontalOptions="FillAndExpand" HeightRequest="1"></BoxView>
+                                        <!--Parte inferior de la vista-->
+                                        <!--Reordenar y total-->
+                                        <StackLayout Grid.Column="0"
+                                                 Grid.Row="5" Orientation="Horizontal"
+                                                 HorizontalOptions="FillAndExpand">
+                                            <Label Text="{Binding Total,StringFormat='Total :{0}'}"
+                                               TextColor="Black"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="StartAndExpand"
+                                               Margin="10,10,5,10"
+                                               FontSize="Medium"></Label>
+
+                                            <Button BackgroundColor="ForestGreen"
+                                                Text="Reordenar"
+                                                Margin="5,10,10,10"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="EndAndExpand"
+                                                FontSize="Small"
+                                                TextColor="White"></Button>
+                                        </StackLayout>
+                                        <StackLayout Grid.Row="6">
+                                            
+                                        </StackLayout>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ScrollView>
+        </ContentPage>
+        <!--Un dashboard super verga-->
+        <ContentPage Title="Resumen"   Visual="Material">
+            
+        </ContentPage>
+    </TabbedPage>
 </TabbedPage>

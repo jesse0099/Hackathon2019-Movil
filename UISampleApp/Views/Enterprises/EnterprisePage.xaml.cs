@@ -37,5 +37,10 @@ namespace UISampleApp.Views.Enterprises
 
             lstEnterprises.BindingContext = Context;
         }
+
+        private void SldStars_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+
+        }
     }
 }

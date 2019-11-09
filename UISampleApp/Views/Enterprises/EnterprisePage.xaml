@@ -2,29 +2,32 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UISampleApp.Views.Enterprises.EnterprisePage"
-             xmlns:local ="clr-namespace:UISampleApp.Models">
+             xmlns:local ="clr-namespace:UISampleApp.Models"
+             xmlns:localControls ="clr-namespace:UISampleApp.Controls"
+             >
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:RatingConverter x:Key="RatingConverter"></local:RatingConverter>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ScrollView>
-        <Grid>
-            <!--Filas-->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <!--Columnas-->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+    <Grid >
+        <!--Filas-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--Columnas-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-            <Frame  Grid.Row="0"  CornerRadius="20" Margin="5,5,5,5" HeightRequest="25">
-                <SearchBar  Placeholder="DevSocket SA"></SearchBar>
-            </Frame>
-
-            <ListView Grid.Row="1" x:Name="lstEnterprises"
+        <Frame  Grid.Row="0"  CornerRadius="20" Margin="5,5,5,5" HeightRequest="25">
+            <SearchBar  Placeholder="DevSocket SA"></SearchBar>
+        </Frame>
+        <ScrollView Grid.Row="1">
+            <ListView  x:Name="lstEnterprises"
                       ItemsSource="{Binding Empresas,Mode=TwoWay}" 
                       SelectionMode="Single"
                       HasUnevenRows="True">
@@ -86,6 +89,27 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </Grid>
-    </ScrollView>
+        </ScrollView>
+
+        <Slider             Minimum="0"
+                            Scale="1"
+                            Maximum="5"
+                            x:Name="sldStars"
+                            HeightRequest="60"
+                            Margin="5,0,5,6"
+                            ThumbImageSource="starSelector16.png"
+                            MinimumTrackColor="Red"
+                            MaximumTrackColor="ForestGreen"
+                            ThumbColor="LightGray" 
+                            Value="2.5"
+                            Grid.Row="2"/>
+        
+        <Label     BindingContext="{x:Reference sldStars}"
+                   Text="{Binding Value}"
+                   Grid.Row="3"
+                   TextColor="{Binding Value,Converter={StaticResource RatingConverter}}"
+                   HorizontalOptions="Center"
+                   FontSize="Small"></Label>
+
+    </Grid>
 </ContentPage>

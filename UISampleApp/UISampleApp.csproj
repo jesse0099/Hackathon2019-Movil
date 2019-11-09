@@ -51,10 +51,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CustomSlider.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Empresa.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Orden.cs" />
     <Compile Include="Models\RatingConverter.cs" />
     <Compile Include="ViewModels\EnterprisePageViewModel.cs" />
+    <Compile Include="ViewModels\HistoricPageViewModel.cs" />
     <Compile Include="ViewModels\RootExplorePageViewModel.cs" />
     <Compile Include="Models\NotificationObject.cs" />
     <Compile Include="UISampleAppPage.xaml.cs">
@@ -69,6 +73,9 @@
       <DependentUpon>RootHomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Logins\LoginDaniaPagecs.cs" />
+    <Compile Include="Views\Logins\LoginFinal.xaml.cs">
+      <DependentUpon>LoginFinal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Logins\LoginPage.xaml.cs">
       <DependentUpon>..\..\Logins\LoginPage.xaml</DependentUpon>
     </Compile>
@@ -78,6 +85,9 @@
     <Compile Include="Controls\ImageEntry.cs" />
     <Compile Include="Views\SignUps\SignUpDaniaPage.xaml.cs">
       <DependentUpon>SignUpDaniaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SignUps\SingUpFinal.xaml.cs">
+      <DependentUpon>SingUpFinal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UpdateInfoUser\ActualizarInformacionPage.xaml.cs">
       <DependentUpon>ActualizarInformacionPage.xaml</DependentUpon>
@@ -118,7 +128,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Logins\LoginFinal.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\UpdateInfoUser\ActualizarInformacionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -127,6 +142,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Enterprises\EnterprisePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SignUps\SingUpFinal.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

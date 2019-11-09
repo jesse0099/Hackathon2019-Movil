@@ -21,7 +21,9 @@ namespace UISampleApp.Views.Home
             On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             this.SelectedTabColor = Color.White;
             this.UnselectedTabColor = Color.White;
+
             
+
             lblDateRegistered.Text = string.Format("{0:t}",DateTime.Now.ToString());
 
             //LecturaMensajes
@@ -29,6 +31,8 @@ namespace UISampleApp.Views.Home
                 //Iniciar navegacion en el stack
                 gotoEnterprise(((Categoria)lstCats.SelectedItem).NombreCategoria);
             });
+
+            
         }
 
         private async void  gotoEnterprise(string categoria)
@@ -40,6 +44,10 @@ namespace UISampleApp.Views.Home
         {
             await Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new UISampleApp.Views.UpdateInfoUser.ActualizarInformacion());
         }
+
+
+
+
     }
 
 }
