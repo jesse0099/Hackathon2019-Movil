@@ -31,7 +31,11 @@
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
-    <AndroidSupportedAbis>arm64-v8a;armeabi;armeabi-v7a;x86;x86_64</AndroidSupportedAbis>
+    <AndroidSupportedAbis>
+    </AndroidSupportedAbis>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,6 +67,12 @@
     </Reference>
     <Reference Include="Plugin.Permissions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Plugin.Permissions.5.0.0-beta\lib\monoandroid90\Plugin.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup, Version=1.2.0.223, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rg.Plugins.Popup.1.2.0.223\lib\MonoAndroid\Rg.Plugins.Popup.dll</HintPath>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup.Droid, Version=1.2.0.223, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rg.Plugins.Popup.1.2.0.223\lib\MonoAndroid\Rg.Plugins.Popup.Droid.dll</HintPath>
     </Reference>
     <Reference Include="SuaveControls.FloatingActionButton, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SuaveControls.FloatingActionButton.2017.10.17\lib\monoandroid80\SuaveControls.FloatingActionButton.dll</HintPath>
@@ -217,6 +227,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Effects\DroidBackgroundEntryEffect.cs" />
     <Compile Include="Renderers\ImageEntryRenderer.cs" />
+    <Compile Include="UISampleAppPage.xaml.cs">
+      <DependentUpon>UISampleAppPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -572,6 +585,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\orderCheck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\xa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\userF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UISampleAppPage.xaml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.28.0.0.3\build\monoandroid90\Xamarin.Android.Support.Annotations.targets')" />

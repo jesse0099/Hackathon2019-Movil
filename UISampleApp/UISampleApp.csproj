@@ -103,6 +103,9 @@
     <Reference Include="Plugin.Permissions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Plugin.Permissions.5.0.0-beta\lib\netstandard1.0\Plugin.Permissions.dll</HintPath>
     </Reference>
+    <Reference Include="Rg.Plugins.Popup, Version=1.2.0.223, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rg.Plugins.Popup.1.2.0.223\lib\netstandard1.0\Rg.Plugins.Popup.dll</HintPath>
+    </Reference>
     <Reference Include="SuaveControls.FloatingActionButton, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SuaveControls.FloatingActionButton.2017.10.17\lib\portable45-net45+win8+wp8+wpa81\SuaveControls.FloatingActionButton.dll</HintPath>
     </Reference>

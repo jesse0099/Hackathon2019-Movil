@@ -183,8 +183,8 @@
                         <ListView.ItemTemplate>
                             <DataTemplate >
                                 <ViewCell>
-                                    <Grid Margin="5,2,5,4">
-                                        <Grid.RowDefinitions>
+                                    <Grid Margin="5,2,5,18" RowSpacing="0">
+                                        <Grid.RowDefinitions >
                                             <RowDefinition Height="120"></RowDefinition>
                                             <RowDefinition Height="Auto"></RowDefinition>
                                             <RowDefinition Height="Auto"></RowDefinition>
@@ -299,19 +299,49 @@
                                                VerticalOptions="Center"
                                                HorizontalOptions="StartAndExpand"
                                                Margin="10,10,5,10"
-                                               FontSize="Medium"></Label>
+                                               FontSize="Small"></Label>
 
                                             <Button BackgroundColor="ForestGreen"
                                                 Text="Reordenar"
                                                 Margin="5,10,10,10"
                                                 VerticalOptions="Center"
                                                 HorizontalOptions="EndAndExpand"
-                                                FontSize="Small"
+                                                FontSize="Micro"
                                                 TextColor="White"></Button>
                                         </StackLayout>
-                                        <StackLayout Grid.Row="6">
-                                            
-                                        </StackLayout>
+                                        <BoxView Grid.Column="0"  HorizontalOptions="FillAndExpand" Grid.Row="6" HeightRequest="1" Color="LightGray"></BoxView>
+                                            <!--Vista de botonmes de botones de ayuda-->
+                                        <Grid Grid.Row="7" HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition  Width="1*"></ColumnDefinition>
+                                                <ColumnDefinition  Width="1*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Text="Ver detalle"
+                                                    Padding="4"
+                                                    CornerRadius="0"
+                                                    Grid.Column="0"
+                                                    BorderColor="DarkGray"
+                                                    BorderWidth="1"
+                                                    Grid.RowSpan="1"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    TextColor="DarkGray"
+                                                    BackgroundColor="LightGray"
+                                                    FontSize="Micro"></Button>
+                                            <Button Text="Ayuda"
+                                                    BorderColor="DarkGray"
+                                                    CornerRadius="0"
+                                                    Padding="4"
+                                                    BorderWidth="1"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Grid.Row="0"
+                                                    TextColor="DarkGray"
+                                                    Grid.Column="1"
+                                                    BackgroundColor="LightGray"
+                                                    FontSize="Micro"></Button>
+                                        </Grid>
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>
