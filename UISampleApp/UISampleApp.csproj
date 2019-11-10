@@ -56,9 +56,11 @@
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Orden.cs" />
+    <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\RatingConverter.cs" />
     <Compile Include="ViewModels\EnterprisePageViewModel.cs" />
     <Compile Include="ViewModels\HistoricPageViewModel.cs" />
+    <Compile Include="ViewModels\InventarioPageViewModel.cs" />
     <Compile Include="ViewModels\RootExplorePageViewModel.cs" />
     <Compile Include="Models\NotificationObject.cs" />
     <Compile Include="UISampleAppPage.xaml.cs">
@@ -69,6 +71,9 @@
     <Compile Include="Views\Enterprises\EnterprisePage.xaml.cs">
       <DependentUpon>EnterprisePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Enterprises\InventarioPage.xaml.cs">
+      <DependentUpon>InventarioPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Home\RootHomePage.xaml.cs">
       <DependentUpon>RootHomePage.xaml</DependentUpon>
     </Compile>
@@ -78,6 +83,9 @@
     </Compile>
     <Compile Include="Views\Logins\LoginPage.xaml.cs">
       <DependentUpon>..\..\Logins\LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopUps\TestPop.xaml.cs">
+      <DependentUpon>TestPop.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SignUps\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
@@ -151,6 +159,19 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\SignUps\SingUpFinal.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Enterprises\InventarioPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\PopUps\TestPop.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

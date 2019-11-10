@@ -24,6 +24,8 @@ namespace UISampleApp.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
+            Rg.Plugins.Popup.Popup.Init(this, bundle);
+
             Window.SetStatusBarColor(Android.Graphics.Color.ParseColor("#0a0a0a"));
           
             LoadApplication(new App());

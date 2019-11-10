@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using UISampleApp.Models;
 using System.ComponentModel;
+using Xamarin.Forms;
 
 namespace UISampleApp.ViewModels
 {
@@ -57,7 +58,7 @@ namespace UISampleApp.ViewModels
             if (e.PropertyName == nameof(this.SelectedEnterprise))
             {
                 //Enviar mensaje para navegar
-
+                MessagingCenter.Send(this,"GotoInventario");
             }
         }
     }

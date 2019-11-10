@@ -36,11 +36,25 @@ namespace UISampleApp.Views.Enterprises
             InitializeComponent();
 
             lstEnterprises.BindingContext = Context;
+
+
+            MessagingCenter.Subscribe<EnterprisePageViewModel>(this, "GotoInventario", (x) => {
+                //Respuesta
+                gotoInventario(((Empresa)lstEnterprises.SelectedItem).Nombre);
+
+            });
+
         }
 
         private void SldStars_ValueChanged(object sender, ValueChangedEventArgs e)
         {
 
         }
+
+        private async void gotoInventario(string empresa)
+        {
+            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new UISampleApp.Views.Enterprises.InventarioPage(empresa));
+        }
+
     }
 }

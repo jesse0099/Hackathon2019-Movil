@@ -30,7 +30,8 @@
             <ListView  x:Name="lstEnterprises"
                       ItemsSource="{Binding Empresas,Mode=TwoWay}" 
                       SelectionMode="Single"
-                      HasUnevenRows="True">
+                      HasUnevenRows="True"
+                      SelectedItem="{Binding SelectedEnterprise,Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
