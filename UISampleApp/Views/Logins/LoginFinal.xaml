@@ -3,10 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UISampleApp.Views.Logins.LoginFinal">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="10,20,10,5"  BackgroundColor="#0D0937">
+
+            <Image
+                Source="xa">
+            </Image>
+            <Button 
+                 x:Name="go_login"
+                 BackgroundColor="#3699DE"
+                 TextColor="White"      
+                 BorderRadius="23"
+                Clicked="Go_login_Clicked"
+                 Text="Ingresar">
+            </Button>
+
+            <Label 
+                Text="-O-"
+                TextColor="White"
+                HorizontalOptions="Center"
+                FontSize="Title">
+            </Label>
+
+            <Button 
+                 BackgroundColor="#3699DE"
+                 TextColor="White"
+                 x:Name="go_register"
+                 BorderRadius="23"
+                 Text="Registrarse">
+            </Button>
+
         </StackLayout>
     </ContentPage.Content>
+    <NavigationPage.TitleView>
+        <Label Text=" Bienvenido"
+               FontSize="Title"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"></Label>
+    </NavigationPage.TitleView>
 </ContentPage>

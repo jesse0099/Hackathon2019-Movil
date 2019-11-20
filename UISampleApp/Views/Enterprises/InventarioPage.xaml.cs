@@ -42,6 +42,7 @@ namespace UISampleApp.Views.Enterprises
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
+            
             var popupProperties = new TestPop();
             var scaleAnimation = new ScaleAnimation
             {

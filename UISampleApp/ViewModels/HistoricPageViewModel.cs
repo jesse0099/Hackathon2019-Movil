@@ -21,6 +21,18 @@ namespace UISampleApp.ViewModels
             }
         }
 
+        private Orden selectedOrder;
+
+        public Orden SelectedOrder
+        {
+            get { return selectedOrder; }
+            set { selectedOrder = value;
+                onPropertyChanged();
+            }
+        }
+
+
+
 
         public HistoricPageViewModel()
         {

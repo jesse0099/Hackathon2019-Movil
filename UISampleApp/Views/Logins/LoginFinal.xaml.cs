@@ -16,5 +16,10 @@ namespace UISampleApp.Views.Logins
         {
             InitializeComponent();
         }
+
+        private async void Go_login_Clicked(object sender, EventArgs e)
+        {
+            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new PaginaGeraldLogin());
+        }
     }
 }

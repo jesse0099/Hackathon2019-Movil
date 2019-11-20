@@ -11,7 +11,7 @@ namespace UISampleApp
         {
             InitializeComponent();
 
-            MainPage = new LoginPage();
+            MainPage = new LoginFinal();
         }
 
         protected override void OnStart()

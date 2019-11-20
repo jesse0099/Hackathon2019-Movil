@@ -28,6 +28,17 @@ namespace UISampleApp.Models
             }
         }
 
+        private Producto producto;
+
+        public Producto Producto
+        {
+            get { return producto; }
+            set { producto = value;
+                onPropertyChanged();
+            }
+        }
+
+
 
     }
 }

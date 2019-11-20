@@ -41,6 +41,31 @@ namespace UISampleApp.Models
             }
         }
 
+        private double subTotal;
+
+        public double SubTotal
+        {
+            get { return subTotal; }
+            set
+            {
+                subTotal = value;
+                onPropertyChanged();
+            }
+        }
+
+        private double costoEnvio;
+
+        public double CostoEnvio
+        {
+            get { return costoEnvio; }
+            set
+            {
+                costoEnvio = value;
+                onPropertyChanged();
+            }
+        }
+
+
         private double total;
 
         public double Total
@@ -70,8 +95,11 @@ namespace UISampleApp.Models
             //Leer el id del cliente desde la coleccion de propiedades Application
             //Y hacer una query bien vergas 
             Items = new ObservableCollection<Item>();
-            Items.Add(new Item() { NombreItem = "Coca - cola", Cantidad = 1});
-            Items.Add(new Item() { NombreItem = "Nachos", Cantidad = 1 });
+            Items.Add(new Item() { NombreItem = "Coca - cola", Cantidad = 1,Producto = new Producto() { Descripcion="Coca-cola 355ml",NombreProducto="Coca-cola"} });
+            Items.Add(new Item() { NombreItem = "Nachos", Cantidad = 1, Producto = new Producto() { Descripcion = "Nachos",NombreProducto ="Nachos" } });
+
+            this.SubTotal = Total - (Total * 0.15);
+            this.CostoEnvio = 0.0;
         }
 
 

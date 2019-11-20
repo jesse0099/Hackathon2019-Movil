@@ -11,6 +11,7 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             xmlns:system="clr-namespace:System;assembly=System.Runtime"
             xmlns:viewmodels="clr-namespace:UISampleApp.ViewModels"
+            xmlns:models="clr-namespace:UISampleApp.Models"
             android:TabbedPage.IsSmoothScrollEnabled="True"
             android:TabbedPage.IsSwipePagingEnabled="True"
             >
@@ -157,7 +158,69 @@
             </StackLayout>
         </ScrollView>
     </ContentPage>
-    
+    <ContentPage  Title="Carrito" IconImageSource="Cart96.png" Visual="Material">
+        <ContentPage.Resources>
+            <ResourceDictionary>
+                <models:CarritoPageViewModel x:Key="CarritoVM"></models:CarritoPageViewModel>
+            </ResourceDictionary>
+        </ContentPage.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="Auto" ></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Frame Grid.Row="0" Grid.Column="0" Margin="5,5,5,5" HeightRequest="25" CornerRadius="20">
+                <SearchBar Placeholder="Ram DDR4 12GM Kignstong"  ></SearchBar>
+            </Frame>
+            <ScrollView Margin="5,5,5,5" Grid.Column="0" Grid.Row="1">
+                <ListView x:Name="lstCarrito" BindingContext="{StaticResource CarritoVM }"
+                          ItemsSource="{Binding Items,Mode=TwoWay}"
+                          HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Vertical">
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" 
+                                           Text="{Binding Cantidad,Mode=OneWay}"
+                                           TextColor="ForestGreen"
+                                           FontSize="Small"
+                                           VerticalOptions="Center"></Label>
+                                        <Label Text="{Binding Producto.NombreProducto}"
+                                               FontSize="Small"
+                                               TextColor="Black"
+                                               Grid.Column="1" Grid.Row="1"></Label>
+                                        <Label Text="{Binding Producto.Descripcion}"
+                                               FontSize="Micro"
+                                               TextColor="LightGray"
+                                               Grid.Column="1" Grid.Row="2"></Label>
+                                        <Label Text="{Binding Producto.Precio,StringFormat='Precio : {0}'}" 
+                                               FontSize="Micro"
+                                               TextColor="LightGray"
+                                               Grid.Column="1" Grid.Row="3"></Label>
+                                    </Grid>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+            <Button Style="{StaticResource FollowButton}" Margin="8,8,8,8" Grid.Column="0" Grid.Row="2" Text="Comprar"></Button>
+        </Grid>
+    </ContentPage>
     <TabbedPage x:Name="historial" Title="Historial" 
                 IconImageSource="chart96.png" 
                 xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
@@ -176,10 +239,12 @@
             <ScrollView>
                 <StackLayout Orientation="Vertical">
                     <ListView BindingContext="{StaticResource lstOrdersContext}"
+                          SelectedItem="{Binding SelectedOrder,Mode=OneWay}"
                           ItemsSource="{Binding Ordenes}"
                           HasUnevenRows="True"
-                              SeparatorVisibility="None"
-                              SelectionMode="None">
+                          SeparatorVisibility="None"
+                          SelectionMode="Single"
+                          x:Name="lstOrders">
                         <ListView.ItemTemplate>
                             <DataTemplate >
                                 <ViewCell>
@@ -320,6 +385,7 @@
                                                 <ColumnDefinition  Width="1*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <Button Text="Ver detalle"
+                                                    Clicked="Button_Clicked_1"
                                                     Padding="4"
                                                     CornerRadius="0"
                                                     Grid.Column="0"
