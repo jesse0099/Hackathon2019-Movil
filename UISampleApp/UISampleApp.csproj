@@ -52,6 +52,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CustomSlider.cs" />
+    <Compile Include="Models\ClientProfileResponse.cs" />
     <Compile Include="Models\LoginClientRequest.cs" />
     <Compile Include="Models\LoginClientResponse.cs" />
     <Compile Include="Models\RestClient.cs" />

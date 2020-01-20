@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +32,37 @@ namespace UISampleApp.Models
                 }
                 else
                     return default(T);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async Task<T> GetAuth<T>(string url,string token)
+        {
+            client = new HttpClient();
+            try
+            {
+
+                var cleanToken = token.Replace('"',' ');
+                var cleanedToken = cleanToken.Trim();
+                client.DefaultRequestHeaders.Clear();
+                //var authHeader = new AuthenticationHeaderValue("Bearer",token);
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", string.Format("Bearer {0}",cleanedToken));
+                //client.DefaultRequestHeaders.Add("APP_VERSION", "1.0.0");
+                //client.DefaultRequestHeaders.Authorization = authHeader;
+                var response = await client.GetAsync(url);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var stringResponse = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<T>(stringResponse);
+                }
+                else
+                {
+                    return default(T);
+                }
             }
             catch (Exception ex)
             {

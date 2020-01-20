@@ -32,13 +32,8 @@ namespace UISampleApp.Views.Logins
                     User = txtUser.Text
                 }, typeof(LoginClientRequest));
 
-                //                var responseJason = await proc.PostTokenBody("https://eecommerapi.conveyor.cloud/api/login/authenticateclient", new LoginClientRequest()
-                //                {
-                //                    Password = txtPassword.Text
-                //,
-                //                    User = txtUser.Text
-                //                }, typeof(LoginClientRequest));
-
+                ClientProfileResponse profileResponse = await proc.GetAuth<ClientProfileResponse>(
+                    string.Format("https://eecommerapi.conveyor.cloud/api/clients/profileInfo?uniquename={0}",txtUser.Text), response); 
 
                 if (response!=string.Empty)
                     await Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new RootHomePage());
