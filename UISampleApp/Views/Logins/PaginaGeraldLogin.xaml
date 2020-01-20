@@ -22,8 +22,8 @@
                  Grid.Row="0"
                     CornerRadius="10">
                     <Entry                                                                      
-                  
-                   Margin="10"
+                    x:Name="txtUser"
+                    Margin="10"
                     Keyboard="Email"
                     TextColor="White"
                     Placeholder="Email"
@@ -42,7 +42,7 @@
                     PlaceholderColor="White"
                     Margin="10"
                     TextColor="White"
-               
+                    x:Name="txtPassword"
                     IsPassword="True"
                     Placeholder="Password" ></Entry>
                 </Frame>
