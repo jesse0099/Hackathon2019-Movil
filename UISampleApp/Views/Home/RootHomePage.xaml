@@ -13,9 +13,9 @@
             xmlns:viewmodels="clr-namespace:UISampleApp.ViewModels"
             xmlns:models="clr-namespace:UISampleApp.Models"
             android:TabbedPage.IsSmoothScrollEnabled="True"
-            android:TabbedPage.IsSwipePagingEnabled="True"
-            >
+            android:TabbedPage.IsSwipePagingEnabled="True">
   <!--Pages can be added as references or inline-->
+    
     <ContentPage Title="Perfil"  IconImageSource="user96.png" Visual="Material">
         <ScrollView>
             <Grid ColumnSpacing="0" RowSpacing="0">
@@ -101,12 +101,14 @@
             </Grid>
         </ScrollView>
     </ContentPage>
-    <ContentPage Title="Explorar"   IconImageSource="search96.png" Visual="Material" >
+    <ContentPage Title="Explorar"
+                 IconImageSource="search96.png"
+                 Visual="Material" 
+                 BindingContext="{Binding  Main,Source={StaticResource Locator}}">
         <ContentPage.Resources>
             <ResourceDictionary>
-                <!--Instanciando el view model-->
                 <DataTemplate x:Key="ListViewCategoriesTemplate">
-                    <ViewCell  >
+                    <ViewCell  BindingContext="{Binding  rootViewModel}">
 
                             <Frame    Margin="5,5,5,5" Padding="2" CornerRadius="10" HasShadow="True">
                             <AbsoluteLayout IsClippedToBounds="False">

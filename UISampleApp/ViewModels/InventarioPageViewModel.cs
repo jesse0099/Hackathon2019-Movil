@@ -20,6 +20,10 @@ namespace UISampleApp.ViewModels
             }
         }
 
+        public InventarioPageViewModel() {
+            Productos = new ObservableCollection<Producto>();
+        }
+
 
         public InventarioPageViewModel(string empresa)
         {

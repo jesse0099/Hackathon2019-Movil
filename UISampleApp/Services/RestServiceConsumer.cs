@@ -1,58 +1,71 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using UISampleApp.Models;
 
-namespace UISampleApp.Models
+namespace UISampleApp.Services
 {
-    public class RestClient
+    public class RestServiceConsumer
     {
-        HttpClient client;
-        //Get consumer
-        public async Task<T> GetT<T>(string url)
-        {
-            client = new HttpClient();
+        
+        /*Metodo generico para consumir verbos GET*/
+        public async Task<Response> GetList<T>(string baseUrl,string prefix,string controller){
+
+            HttpClient client = new HttpClient();
+
             try
             {
-
-
+                client.BaseAddress = new Uri(baseUrl);
+                var url = $"{prefix}{controller}";
                 var response = await client.GetAsync(url);
-
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    //Peticion correcta
-                    var jsonStringResponse = await response.Content.ReadAsStringAsync();
-                    return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(jsonStringResponse);
+                var answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode) {
+                    return new Response
+                    {
+                        IsSuccesFull = false,
+                        Message = answer,
+                    };
                 }
-                else
-                    return default(T);
+
+                var objects = JsonConvert.DeserializeObject<T>(answer);
+
+                return new Response
+                {
+                    IsSuccesFull = true,
+                    Result = objects,
+                };
+
             }
             catch (Exception ex)
             {
 
-                throw ex;
-            }
+                return new Response {
+                    IsSuccesFull = false,
+                    Message = ex.Message,
+                };
+            }       
+
         }
 
-        public async Task<T> GetAuth<T>(string url,string token)
+
+        /*Metodos para autenticacion y obtencion de informacion con token*/
+        public async Task<T> GetAuth<T>(string url, string token)
         {
-            client = new HttpClient();
+            HttpClient client = new HttpClient();
             try
             {
 
-                var cleanToken = token.Replace('"',' ');
+                var cleanToken = token.Replace('"', ' ');
                 var cleanedToken = cleanToken.Trim();
                 client.DefaultRequestHeaders.Clear();
-                //var authHeader = new AuthenticationHeaderValue("Bearer",token);
-                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", string.Format("Bearer {0}",cleanedToken));
-                //client.DefaultRequestHeaders.Add("APP_VERSION", "1.0.0");
-                //client.DefaultRequestHeaders.Authorization = authHeader;
+
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", string.Format("Bearer {0}", cleanedToken));
+
                 var response = await client.GetAsync(url);
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
@@ -73,7 +86,7 @@ namespace UISampleApp.Models
 
         public async Task<string> PostToken(string url, Object content, Type ez)
         {
-            client = new HttpClient();
+            HttpClient client = new HttpClient();
             HttpResponseMessage response = null;
 
             try
@@ -100,9 +113,9 @@ namespace UISampleApp.Models
             return string.Empty;
         }
 
-        public async Task<string> PostTokenBody(string url,Object content,Type ez)
+        public async Task<string> PostTokenBody(string url, Object content, Type ez)
         {
-            client = new HttpClient();
+            HttpClient client = new HttpClient();
             HttpResponseMessage response = null;
 
             try
@@ -127,5 +140,6 @@ namespace UISampleApp.Models
 
             return string.Empty;
         }
+
     }
 }

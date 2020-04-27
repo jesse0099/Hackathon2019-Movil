@@ -24,10 +24,16 @@
         </Grid.ColumnDefinitions>
 
         <Frame  Grid.Row="0"  CornerRadius="20" Margin="5,5,5,5" HeightRequest="25">
-            <SearchBar  Placeholder="DevSocket SA"></SearchBar>
+            <SearchBar  Placeholder="DevSocket SA" 
+                        TextChanged="SearchBar_TextChanged"
+                        ></SearchBar>
         </Frame>
         <ScrollView Grid.Row="1">
-            <ListView  x:Name="lstEnterprises"
+            <ListView x:Name="lstEnterprises"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshingCommand,Mode=TwoWay}"
+                      RefreshControlColor="Black"
+                      IsRefreshing="{Binding IsRefreshing,Mode=TwoWay}"
                       ItemsSource="{Binding Empresas,Mode=TwoWay}" 
                       SelectionMode="Single"
                       HasUnevenRows="True"
@@ -42,7 +48,7 @@
                                         <ColumnDefinition Width="3*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="110" ></RowDefinition>
+                                        <RowDefinition Height="Auto" ></RowDefinition>
                                     </Grid.RowDefinitions>
                                     <!--Rounded image-->
                                     <Frame CornerRadius="55" 
@@ -53,8 +59,10 @@
                                            Grid.Column="0"
                                            IsClippedToBounds="True">
                                         <Image x:Name="imgProfile"
-                                               Source="{Binding Ilustracion}" 
-                                               Aspect="Fill"
+                                               WidthRequest="110"
+                                               HeightRequest="110"
+                                               Source="{Binding Logo}" 
+                                               Aspect="AspectFill"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center" />
                                     </Frame>
@@ -92,8 +100,9 @@
             </ListView>
         </ScrollView>
 
-        <Slider             Minimum="0"
-                            Scale="1"
+        <Slider             ValueChanged="SldStars_ValueChanged"
+                            Minimum="0"
+                            Scale="1.0"
                             Maximum="5"
                             x:Name="sldStars"
                             HeightRequest="60"

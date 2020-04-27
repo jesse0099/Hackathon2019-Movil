@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using UISampleApp.Views.SignUps;
 using UISampleApp.Views.Logins;
+using UISampleApp.Views.Home;
 
 namespace UISampleApp
 {
@@ -11,7 +12,7 @@ namespace UISampleApp
         {
             InitializeComponent();
 
-            MainPage = new LoginFinal();
+            MainPage = new RootHomePage();
         }
 
         protected override void OnStart()

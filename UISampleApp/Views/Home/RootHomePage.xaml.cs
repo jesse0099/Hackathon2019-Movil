@@ -73,6 +73,7 @@ namespace UISampleApp.Views.Home
 
         private async void  gotoEnterprise(string categoria)
         {
+            lstCats.SelectedItem = null;
             await Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new UISampleApp.Views.Enterprises.EnterprisePage(categoria));
         }
 

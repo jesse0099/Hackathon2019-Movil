@@ -53,7 +53,11 @@ namespace UISampleApp.ViewModels
         {
            if(e.PropertyName == nameof(CategoriaSeleccionada))
             {
-                    MessagingCenter.Send(this,"Goto");
+                if (CategoriaSeleccionada != null)
+                {
+                    MessagingCenter.Send(this, "Goto");
+                    CategoriaSeleccionada = null;
+                }
             }
         }
     }

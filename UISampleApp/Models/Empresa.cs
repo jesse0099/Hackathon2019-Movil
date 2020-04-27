@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace UISampleApp.Models
 {
     public class Empresa :  NotificationObject
     {
+
+
+
         private string nombre;
 
         public string Nombre
@@ -38,8 +43,6 @@ namespace UISampleApp.Models
             }
         }
 
-
-
         private DateTime fechaAfilacion;
 
         public DateTime FechaAfiliacion
@@ -58,6 +61,22 @@ namespace UISampleApp.Models
             set { estrellas = value;
                 onPropertyChanged();
             }
+        }
+
+        private string _categoria;
+
+        public string Categoria
+        {
+            get { return _categoria; }
+            set { _categoria = value; }
+        }
+
+        private ImageSource _logo;
+
+        public ImageSource Logo
+        {
+            get { return _logo; }
+            set { _logo = value; }
         }
 
 
