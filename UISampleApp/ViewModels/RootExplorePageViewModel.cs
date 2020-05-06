@@ -40,7 +40,6 @@ namespace UISampleApp.ViewModels
 
             //Reconociendo seleccion
             PropertyChanged += RootExplorePageViewModel_PropertyChanged;
-
             //Valores de testeo
             CategoriasList = new ObservableCollection<Categoria>();
             CategoriasList.Add(new Categoria(){ NombreCategoria="Farmacias",Vendedores=89,Portada="Drugs.png"});

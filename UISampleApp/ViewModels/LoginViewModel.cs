@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using UISampleApp.Helpers;
 using UISampleApp.Models;
 using UISampleApp.Services;
 using UISampleApp.Views.Home;
@@ -13,6 +14,8 @@ namespace UISampleApp.ViewModels
 {
     public class LoginViewModel: NotificationObject 
     {
+
+        #region Propiedades
         private RestServiceConsumer proc;
 
         private Login userLogin;
@@ -20,31 +23,47 @@ namespace UISampleApp.ViewModels
         public Login UserLoguin
         {
             get { return userLogin; }
-            set { userLogin = value;
+            set
+            {
+                userLogin = value;
                 onPropertyChanged();
             }
         }
-
-
-
         private ICommand _loginCommand;
 
         public ICommand LoginCommand
         {
             get { return _loginCommand; }
-            set { _loginCommand = value;
+            set
+            {
+                _loginCommand = value;
+                onPropertyChanged();
+            }
+        }
+
+        private Boolean _rememberMe;
+
+        public Boolean RememberMe
+        {
+            get { return _rememberMe; }
+            set { _rememberMe = value;
                 onPropertyChanged();
             }
         }
 
 
+        #endregion
 
 
-        public LoginViewModel() {
+        #region Constructores
+        public LoginViewModel()
+        {
             this.UserLoguin = new Login();
             LoginCommand = new Command(LoginCommandExecute);
         }
+        #endregion
 
+        #region Metodos  y eventos
         public async void LoginCommandExecute()
         {
 
@@ -52,22 +71,27 @@ namespace UISampleApp.ViewModels
             if (userLogin.password != string.Empty && userLogin.userName != string.Empty)
             {
                 proc = new RestServiceConsumer();
-                var response = await proc.PostToken("https://eecommerapi.conveyor.cloud/api/login/authenticateclient", new LoginClientRequest()
+                var controllerString = $"{Constantes.LOGINAUTH}{Constantes.LOGINAUTHUSERPAR}={userLogin.userName}&{Constantes.LOGINAUTHPASSPAR}={userLogin.password}";
+                var response = await proc.Get<string>(Constantes.BASEURL, Constantes.LOGINPREFIX, controllerString);
+
+                if (!response.IsSuccesFull)
                 {
-                    Password = userLogin.password
-                ,
-                    User = userLogin.userName
-                }, typeof(LoginClientRequest));
+                    //Errores en la respuesta
+                    if (response.Result == null)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error!", "Credenciales incorrectas", "OK");
+                        return;
+                    }
+                    //Manejo de otros errores
+                    await Application.Current.MainPage.DisplayAlert("Error!", response.Message, "OK");
+                    return;
+                }
 
-                /*Informacion del perfil del cliente,de momento no hago nada con eso*/
-                //ClientProfileResponse profileResponse = await proc.GetAuth<ClientProfileResponse>(
-                //    string.Format("https://eecommerapi.conveyor.cloud/api/clients/profileInfo?uniquename={0}", txtUser.Text), response);
+                Settings.SerializedToken = Convert.ToString(response.Result);
+                Settings.IsRemembered = RememberMe;
+                //Navegacion a la pagina Root bloqueando el regreso al Login
+                Application.Current.MainPage = new RootHomePage();
 
-                /*navegando a la pagina raiz*/
-                if (response != string.Empty)
-                    await Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new RootHomePage());
-                else
-                    await Application.Current.MainPage.DisplayAlert("Error!", "Credenciales incorrectas", "OK");
             }
             else
             {
@@ -75,5 +99,7 @@ namespace UISampleApp.ViewModels
             }
 
         }
+        #endregion
+
     }
 }

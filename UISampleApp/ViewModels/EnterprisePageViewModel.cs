@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using UISampleApp.Services;
 using System.Windows.Input;
 using System.IO;
+using UISampleApp.Helpers;
 
 namespace UISampleApp.ViewModels
 {
@@ -18,11 +19,31 @@ namespace UISampleApp.ViewModels
     public class EnterprisePageViewModel : NotificationObject
     {
         #region Propiedades
+        private string _message;
+
+        public string Message
+        {
+            get { return _message; }
+            set { _message = value;
+                onPropertyChanged();
+            }
+        }
+
+
+        private Boolean _isVisibleMessage;
+
+        public Boolean IsVisibleMessage
+        {
+            get { return _isVisibleMessage; }
+            set { _isVisibleMessage = value;
+                onPropertyChanged();
+            }
+        }
+
         public string CurrentCategory { get; set; }
 
         public RestServiceConsumer proc { get; set; }
 
-        private string lorem = "Su tienda de conveniencia mas surtida";
 
         private Boolean _isRefreshing;
 
@@ -75,7 +96,9 @@ namespace UISampleApp.ViewModels
 
         #endregion
 
-        public EnterprisePageViewModel() {
+        #region Constructores
+        public EnterprisePageViewModel()
+        {
 
         }
 
@@ -85,24 +108,43 @@ namespace UISampleApp.ViewModels
             Empresas = new ObservableCollection<Empresa>();
             UnfilteredEnterprises = new ObservableCollection<Empresa>();
             this.CurrentCategory = categoria;
+            this.IsVisibleMessage = false;
             this.RefreshingCommand = new Command(refreshingExecute);
-            loadBusiness(categoria);
+            loadBusiness(categoria).SafeFireAndForget(false);
             PropertyChanged += EnterprisePageViewModel_PropertyChanged;
         }
+        #endregion
 
+        #region Metodos y eventos
 
-        #region Metodos,comandos y eventos
-        public async void loadBusiness(string category)
+        public async Task loadBusiness(string category)
         {
             Device.BeginInvokeOnMainThread(() => {
                 this.IsRefreshing = true;
             });
-            var response = await proc.GetList<List<Comercio>>(Constantes.BASEURL, Constantes.COMMEPREFIX, $"{Constantes.COMMEGETBYCAT}{category}");
-            await Task.Delay(1000);
+
+            //Sin conexion
+            var connection =  await proc.CheckConnection();
+            if (!connection.IsSuccesFull) {
+                Device.BeginInvokeOnMainThread(() => {
+                    this.IsRefreshing = false;
+                });
+                this.IsVisibleMessage = true;
+                this.Message = connection.Message;
+                return;
+            }
+
+            this.IsVisibleMessage = false;
+            var response = await proc.Get<List<Comercio>>(Constantes.BASEURL, Constantes.COMMEPREFIX, $"{Constantes.COMMEGETBYCAT}{category}");
+
             if (!response.IsSuccesFull)
             {
                 //Error
-                this.IsRefreshing = false;
+                Device.BeginInvokeOnMainThread(() => {
+                    this.IsRefreshing = false;
+                });
+
+                return;
             }
             else
             {
@@ -120,7 +162,7 @@ namespace UISampleApp.ViewModels
                         imageSource = ImageSource.FromFile("isoBuy.png");
 
 
-                        this.Empresas.Add(new Empresa() { Categoria = item.categoria, Estrellas = item.estrellas, Descripcion = item.descripcion, Nombre = item.nombreComercio, Logo = imageSource, Ilustracion = "isoBuy.png", FechaAfiliacion = item.fechaAfiliacion });
+                        this.Empresas.Add(new Empresa() { idEmpresa=item.idComercio,Categoria = item.categoria, Estrellas = item.estrellas, Descripcion = item.descripcion, Nombre = item.nombreComercio, Logo = imageSource, Ilustracion = "isoBuy.png", FechaAfiliacion = item.fechaAfiliacion });
                     
                 }
                 this.UnfilteredEnterprises = this.Empresas;
@@ -132,14 +174,18 @@ namespace UISampleApp.ViewModels
         }
         public void refreshingExecute() {
             this.Empresas.Clear();
-            loadBusiness(this.CurrentCategory);
+            loadBusiness(this.CurrentCategory).SafeFireAndForget(false);
         }
         private void EnterprisePageViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(this.SelectedEnterprise))
             {
                 //Enviar mensaje para navegar
-                MessagingCenter.Send(this, "GotoInventario");
+                if (selectedEnterprise != null)
+                {
+                    MessagingCenter.Send(this, "GotoInventario");
+                    selectedEnterprise = null;
+                }
             }
         }
         public void filter(string filter) {

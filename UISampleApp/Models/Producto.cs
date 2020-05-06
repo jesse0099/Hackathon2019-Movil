@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UISampleApp.Api_Models;
+using Xamarin.Forms;
 
 namespace UISampleApp.Models
 {
-    public class Producto : NotificationObject
+    public class Producto 
     {
         private int id;
 
@@ -14,9 +16,37 @@ namespace UISampleApp.Models
         {
             get { return id; }
             set { id = value;
-                onPropertyChanged();
             }
         }
+
+        private int idSucursal;
+
+        public int IdSucursal
+        {
+            get { return idSucursal; }
+            set { idSucursal = value;
+
+            }
+        }
+
+        private string _nombreSucursal;
+
+        private ApiSucursal _sucursal;
+
+        public ApiSucursal Sucursal
+        {
+            get { return _sucursal; }
+            set { _sucursal = value; }
+        }
+
+
+        public string NombreSucursal
+        {
+            get { return _nombreSucursal; }
+            set { _nombreSucursal = value;
+            }
+        }
+
 
         private string nombreProducto;
 
@@ -24,7 +54,6 @@ namespace UISampleApp.Models
         {
             get { return nombreProducto; }
             set { nombreProducto = value;
-                onPropertyChanged();
             }
         }
 
@@ -34,7 +63,6 @@ namespace UISampleApp.Models
         {
             get { return empresa; }
             set { empresa = value;
-                onPropertyChanged();
             }
         }
 
@@ -44,7 +72,6 @@ namespace UISampleApp.Models
         {
             get { return precio; }
             set { precio = value;
-                onPropertyChanged();
             }
         }
 
@@ -55,7 +82,6 @@ namespace UISampleApp.Models
         {
             get { return existencias; }
             set { existencias = value;
-                onPropertyChanged();
             }
         }
 
@@ -65,7 +91,6 @@ namespace UISampleApp.Models
         {
             get { return descripcion; }
             set { descripcion = value;
-                onPropertyChanged();
             }
         }
 
@@ -75,7 +100,15 @@ namespace UISampleApp.Models
         {
             get { return fechVencimiento; }
             set { fechVencimiento = value;
-                onPropertyChanged();
+            }
+        }
+
+        private ImageSource ilustracion;
+
+        public ImageSource Ilustracion
+        {
+            get { return ilustracion; }
+            set { ilustracion = value;
             }
         }
 

@@ -44,13 +44,14 @@ namespace UISampleApp.Views.Enterprises
            
             InitializeComponent();
 
-            lstEnterprises.BindingContext = Context;
+            this.BindingContext = Context;
 
 
             //Navegacion al inventario de la empresa seleccionada
             MessagingCenter.Subscribe<EnterprisePageViewModel>(this, "GotoInventario", (x) => {
                 //Respuesta
-                gotoInventario(((Empresa)lstEnterprises.SelectedItem).Nombre);
+                if (lstEnterprises.SelectedItem != null)
+                    gotoInventario(((Empresa)lstEnterprises.SelectedItem).idEmpresa);
             });
 
         }
@@ -62,9 +63,9 @@ namespace UISampleApp.Views.Enterprises
             //sldStars.Value = newStep * 1.1;
         }
 
-        private async void gotoInventario(string empresa)
+        private async void gotoInventario(int comercio)
         {
-            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new UISampleApp.Views.Enterprises.InventarioPage(empresa));
+            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new UISampleApp.Views.Enterprises.InventarioPage(comercio));
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)

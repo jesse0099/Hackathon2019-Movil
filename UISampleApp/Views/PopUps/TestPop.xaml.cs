@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace UISampleApp.Views.PopUps
         public TestPop()
         {
             InitializeComponent();
+            
         }
         protected override void OnAppearing()
         {
@@ -80,6 +82,8 @@ namespace UISampleApp.Views.PopUps
             // Return true if you don't want to close this popup page when a back button is pressed
             return base.OnBackButtonPressed();
         }
+        
+        //Para cerrar chingaderas en Android debo hacerlo en el main activity
 
         // Invoced when background is clicked
         protected override bool OnBackgroundClicked()

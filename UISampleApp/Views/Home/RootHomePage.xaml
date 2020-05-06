@@ -15,7 +15,6 @@
             android:TabbedPage.IsSmoothScrollEnabled="True"
             android:TabbedPage.IsSwipePagingEnabled="True">
   <!--Pages can be added as references or inline-->
-    
     <ContentPage Title="Perfil"  IconImageSource="user96.png" Visual="Material">
         <ScrollView>
             <Grid ColumnSpacing="0" RowSpacing="0">

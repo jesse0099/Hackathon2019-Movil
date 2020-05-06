@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,37 @@ namespace UISampleApp.Services
 {
     public class RestServiceConsumer
     {
+        /*Metodo para chequear la conexion*/
+        public async Task<Response> CheckConnection() {
+            if (!CrossConnectivity.Current.IsConnected) {
+                return new Response()
+                {
+                    IsSuccesFull = false,
+                    Message = "Sin conexión a internet",
+                };
+            }
+
+
+            var isReachable = await  CrossConnectivity.Current.IsRemoteReachable("https://www.youtube.com");
+            if (!isReachable)
+            {
+                return new Response()
+                {
+                    IsSuccesFull = false,
+                    Message = "Sin conexión a internet",
+                };
+            }
+
+            return new Response()
+            {
+                IsSuccesFull = true,
+                Message="Conexión Correcta"
+            };
+
+        }
         
         /*Metodo generico para consumir verbos GET*/
-        public async Task<Response> GetList<T>(string baseUrl,string prefix,string controller){
+        public async Task<Response> Get<T>(string baseUrl,string prefix,string controller){
 
             HttpClient client = new HttpClient();
 
@@ -51,7 +80,50 @@ namespace UISampleApp.Services
             }       
 
         }
+        /*Metodo generico para consumir verbos GET que piden TOKEN*/
 
+        /*Metodo generico para consumir verbos POST*/
+        public async Task<Response> Post<T>(string baseUrl, string prefix, string controller,T model) {
+            HttpClient client = new HttpClient();
+
+            try
+            {
+                client.BaseAddress = new Uri(baseUrl);
+                var request = JsonConvert.SerializeObject(model);
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+                var url = $"{prefix}{controller}";
+                var response = await client.PostAsync(url,content);
+                var answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccesFull = false,
+                        Message = answer,
+                    };
+                }
+
+                var objects = JsonConvert.DeserializeObject<T>(answer);
+
+                return new Response
+                {
+                    IsSuccesFull = true,
+                    Result = objects,
+                };
+
+            }
+            catch (Exception ex)
+            {
+
+                return new Response
+                {
+                    IsSuccesFull = false,
+                    Message = ex.Message,
+                };
+            }
+
+
+        }
 
         /*Metodos para autenticacion y obtencion de informacion con token*/
         public async Task<T> GetAuth<T>(string url, string token)

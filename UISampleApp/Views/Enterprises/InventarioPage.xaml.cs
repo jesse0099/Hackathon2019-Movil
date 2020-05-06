@@ -1,4 +1,5 @@
 ﻿using Rg.Plugins.Popup.Animations;
+using Rg.Plugins.Popup.Contracts;
 using Rg.Plugins.Popup.Enums;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -27,14 +28,25 @@ namespace UISampleApp.Views.Enterprises
             }
         }
 
-        public InventarioPage(string empresa)
+        public InventarioPage(int empresa)
         {
             //Context 
-            Context  = new InventarioPageViewModel(empresa);
+            Context = new InventarioPageViewModel(empresa);
 
             InitializeComponent();
 
-            lstEnterprises.BindingContext = Context;
+            this.BindingContext = Context;
+
+            lstEnterprises.ItemTapped += (object sender, ItemTappedEventArgs e) =>
+            {
+                if (e.Item == null) return;
+
+                Task.Delay(500);
+
+                // Deselect the item.
+                if (sender is Xamarin.Forms.ListView lv) lv.SelectedItem = null;
+
+            };
 
             //this.popupLoadingView.IsVisible = false;
 
@@ -49,7 +61,13 @@ namespace UISampleApp.Views.Enterprises
                 PositionIn = MoveAnimationOptions.Right,
                 PositionOut = MoveAnimationOptions.Left
             };
-            await PopupNavigation.PushAsync(popupProperties);
+            await PopupNavigation.Instance.PushAsync(popupProperties);
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //Filtro de inventario
+            this.Context.filter(((SearchBar)sender).Text.ToLower());
         }
     }
 }

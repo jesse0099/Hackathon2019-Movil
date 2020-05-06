@@ -8,6 +8,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Plugin.CurrentActivity;
+using Rg.Plugins.Popup;
+using Rg.Plugins.Popup.Services;
 
 namespace UISampleApp.Droid
 {
@@ -24,11 +26,24 @@ namespace UISampleApp.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
+            //Inicializacion de RG.Plugin
             Rg.Plugins.Popup.Popup.Init(this, bundle);
 
+            //Cambio de color de la barra de estado
             Window.SetStatusBarColor(Android.Graphics.Color.ParseColor("#0a0a0a"));
           
             LoadApplication(new App());
+        }
+
+        public override void OnBackPressed() {
+            if (Popup.SendBackPressed(base.OnBackPressed))
+            {
+                //PopUps en el stack de de popups
+                PopupNavigation.Instance.PopAllAsync();
+            }
+            else {
+                //Nada en el stack de popups
+            }
         }
     }
 }

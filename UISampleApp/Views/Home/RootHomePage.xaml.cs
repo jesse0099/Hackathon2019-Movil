@@ -42,7 +42,8 @@ namespace UISampleApp.Views.Home
             //LecturaMensajes
             MessagingCenter.Subscribe<RootExplorePageViewModel>(this, "Goto",(a)=> {
                 //Iniciar navegacion en el stack
-                gotoEnterprise(((Categoria)lstCats.SelectedItem).NombreCategoria);
+                if(lstCats.SelectedItem!=null)
+                    gotoEnterprise(((Categoria)lstCats.SelectedItem).NombreCategoria);
             });
 
 
@@ -73,7 +74,6 @@ namespace UISampleApp.Views.Home
 
         private async void  gotoEnterprise(string categoria)
         {
-            lstCats.SelectedItem = null;
             await Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new UISampleApp.Views.Enterprises.EnterprisePage(categoria));
         }
 
@@ -92,13 +92,13 @@ namespace UISampleApp.Views.Home
                     PositionIn = MoveAnimationOptions.Right,
                     PositionOut = MoveAnimationOptions.Left
                 };
-                await PopupNavigation.PushAsync(popupProperties);
+                await  PopupNavigation.Instance.PushAsync(popupProperties);
             }
         }
 
         protected override bool OnBackButtonPressed()
         {
-            return true;
+            return base.OnBackButtonPressed();
         }
 
     }

@@ -2,18 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:UISampleApp.ViewModels"
+             xmlns:i18n="clr-namespace:UISampleApp.Helpers"
              x:Class="UISampleApp.Views.Logins.PaginaGeraldLogin"
              NavigationPage.HasNavigationBar="false"
              x:Name="PaginaLogin"
              BindingContext="{Binding Main ,Source={StaticResource Locator}}">
 
     <ContentPage.Content>
-
-        <StackLayout Padding="10,20,10,5"  BackgroundColor="#0D0937"
+        <ScrollView>
+            <StackLayout Padding="10,20,10,5"  BackgroundColor="#0D0937"
                      BindingContext="{Binding Login}">
+                <Image Source="userF"></Image>
 
-            <Image Source="userF"></Image>
-            <Grid  >
+                <Grid  >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
@@ -60,10 +61,10 @@
             <Grid>
                 <Label Text="Recordar" TextColor="White" Grid.Row="0"
                        Grid.Column="2"></Label>
-                <Switch IsToggled="false"
+                <Switch IsToggled="{Binding RememberMe,Mode=TwoWay}"
                         OnColor="SkyBlue"
-                   HorizontalOptions="Center"
-                          VerticalOptions="CenterAndExpand" 
+                        HorizontalOptions="Center"
+                        VerticalOptions="CenterAndExpand" 
                         Grid.Row="0"
                         Grid.Column="3"/>
 
@@ -79,5 +80,6 @@
             </Button>
 
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

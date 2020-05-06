@@ -15,8 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <!--Columnas-->
         <Grid.ColumnDefinitions>
@@ -99,27 +98,20 @@
                 </ListView.ItemTemplate>
             </ListView>
         </ScrollView>
-
-        <Slider             ValueChanged="SldStars_ValueChanged"
-                            Minimum="0"
-                            Scale="1.0"
-                            Maximum="5"
-                            x:Name="sldStars"
-                            HeightRequest="60"
-                            Margin="5,0,5,6"
-                            ThumbImageSource="starSelector16.png"
-                            MinimumTrackColor="Red"
-                            MaximumTrackColor="ForestGreen"
-                            ThumbColor="LightGray" 
-                            Value="2.5"
-                            Grid.Row="2"/>
-        
-        <Label     BindingContext="{x:Reference sldStars}"
-                   Text="{Binding Value}"
-                   Grid.Row="3"
-                   TextColor="{Binding Value,Converter={StaticResource RatingConverter}}"
-                   HorizontalOptions="Center"
-                   FontSize="Small"></Label>
-
+        <StackLayout
+            x:Name="stackMessage"
+            IsVisible="{Binding IsVisibleMessage}"
+            BackgroundColor="Black"
+            Grid.Row="2"
+            HeightRequest="24">
+            <Label
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                HorizontalOptions="FillAndExpand"
+                TextColor="White"
+                FontSize="Small" 
+                Text="{ Binding Message}" 
+                IsVisible="True"></Label>
+        </StackLayout>
     </Grid>
 </ContentPage>

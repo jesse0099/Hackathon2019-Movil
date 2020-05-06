@@ -8,10 +8,10 @@ using Xamarin.Forms;
 
 namespace UISampleApp.Models
 {
-    public class Empresa :  NotificationObject
+    public class Empresa 
     {
 
-
+        public int idEmpresa { get; set; }
 
         private string nombre;
 
@@ -19,7 +19,7 @@ namespace UISampleApp.Models
         {
             get { return nombre; }
             set { nombre = value;
-                onPropertyChanged();
+
             }
         }
 
@@ -29,7 +29,7 @@ namespace UISampleApp.Models
         {
             get { return ilustracion; }
             set { ilustracion = value;
-                onPropertyChanged();
+
             }
         }
 
@@ -39,7 +39,7 @@ namespace UISampleApp.Models
         {
             get { return descripcion; }
             set { descripcion = value;
-                onPropertyChanged();
+
             }
         }
 
@@ -49,7 +49,7 @@ namespace UISampleApp.Models
         {
             get { return fechaAfilacion; }
             set { fechaAfilacion = value;
-                onPropertyChanged();
+
             }
         }
 
@@ -59,7 +59,7 @@ namespace UISampleApp.Models
         {
             get { return estrellas; }
             set { estrellas = value;
-                onPropertyChanged();
+
             }
         }
 

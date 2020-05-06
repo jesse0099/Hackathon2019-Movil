@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,15 +7,24 @@ using System.Threading.Tasks;
 
 namespace UISampleApp.Models
 {
-    public class Item : NotificationObject
+    public class Item 
     {
+
+        private int _idCarrito;
+
+        [PrimaryKey, AutoIncrement]
+        public int IdCarrito
+        {
+            get { return _idCarrito; }
+            set { _idCarrito = value; }
+        }
+
         private int cantidad;
 
         public int Cantidad
         {
             get { return cantidad; }
             set { cantidad = value;
-                onPropertyChanged();
             }
         }
 
@@ -24,7 +34,6 @@ namespace UISampleApp.Models
         {
             get { return nombreItem; }
             set { nombreItem = value;
-                onPropertyChanged();
             }
         }
 
@@ -34,7 +43,6 @@ namespace UISampleApp.Models
         {
             get { return producto; }
             set { producto = value;
-                onPropertyChanged();
             }
         }
 
