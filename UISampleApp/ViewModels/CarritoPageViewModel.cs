@@ -31,7 +31,7 @@ namespace UISampleApp.Models
             Items.Add(new Item() { Cantidad=1,NombreItem ="NAN" ,Producto = new Producto() { NombreProducto = "TITAN XP",Precio =2000 ,Descripcion= "GPU dedicada NVIDIA" } });
             Items.Add(new Item() { Cantidad=1,NombreItem ="NAN" ,Producto = new Producto() { NombreProducto = "GTX 1080",Precio =1000 ,Descripcion="GPU dedicada NVIDIA"} });
            // App.Database.SaveItemAsync(new TodoItem() {Name="C",Notes="Nota"});
-            var x = App.Database.GetItemsAsync();
+           //var x = App.Database.GetItemsAsync();
 
 
         }

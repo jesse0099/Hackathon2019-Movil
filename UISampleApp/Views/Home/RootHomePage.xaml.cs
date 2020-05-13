@@ -28,21 +28,18 @@ namespace UISampleApp.Views.Home
         }
 
 
-        public RootHomePage ()
+        public RootHomePage()
         {
             InitializeComponent();
             On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             this.SelectedTabColor = Color.White;
             this.UnselectedTabColor = Color.White;
 
-            
-
-            lblDateRegistered.Text = string.Format("{0:t}",DateTime.Now.ToString());
 
             //LecturaMensajes
-            MessagingCenter.Subscribe<RootExplorePageViewModel>(this, "Goto",(a)=> {
+            MessagingCenter.Subscribe<RootExplorePageViewModel>(this, "Goto", (a) => {
                 //Iniciar navegacion en el stack
-                if(lstCats.SelectedItem!=null)
+                if (lstCats.SelectedItem != null)
                     gotoEnterprise(((Categoria)lstCats.SelectedItem).NombreCategoria);
             });
 
@@ -72,7 +69,7 @@ namespace UISampleApp.Views.Home
 
         }
 
-        private async void  gotoEnterprise(string categoria)
+        private async void gotoEnterprise(string categoria)
         {
             await Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new UISampleApp.Views.Enterprises.EnterprisePage(categoria));
         }
@@ -86,13 +83,13 @@ namespace UISampleApp.Views.Home
         {
             if (SelectedOrder != null)
             {
-                var popupProperties = new PopUpOrderDetail(SelectedOrder.Items,SelectedOrder);
+                var popupProperties = new PopUpOrderDetail(SelectedOrder.Items, SelectedOrder);
                 var scaleAnimation = new ScaleAnimation
                 {
                     PositionIn = MoveAnimationOptions.Right,
                     PositionOut = MoveAnimationOptions.Left
                 };
-                await  PopupNavigation.Instance.PushAsync(popupProperties);
+                await PopupNavigation.Instance.PushAsync(popupProperties);
             }
         }
 

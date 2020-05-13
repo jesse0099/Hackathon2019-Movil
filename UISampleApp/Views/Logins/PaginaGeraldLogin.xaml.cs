@@ -8,18 +8,21 @@ using UISampleApp.Services;
 using UISampleApp.Views.Home;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SQLite;
+using UISampleApp.Interfaces;
 
 namespace UISampleApp.Views.Logins
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PaginaGeraldLogin : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class PaginaGeraldLogin : ContentPage
+    {
         RestServiceConsumer proc = new RestServiceConsumer();
 
-		public PaginaGeraldLogin ()
-		{
-			InitializeComponent ();
-		}
+        public PaginaGeraldLogin()
+        {
+            InitializeComponent();
+
+        }
 
 
 

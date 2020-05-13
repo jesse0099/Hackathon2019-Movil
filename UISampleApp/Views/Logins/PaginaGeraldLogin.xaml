@@ -6,39 +6,48 @@
              x:Class="UISampleApp.Views.Logins.PaginaGeraldLogin"
              NavigationPage.HasNavigationBar="false"
              x:Name="PaginaLogin"
+             xmlns:local="clr-namespace:UISampleApp.Controls"
              BindingContext="{Binding Main ,Source={StaticResource Locator}}">
 
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="10,20,10,5"  BackgroundColor="#0D0937"
                      BindingContext="{Binding Login}">
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding IsBusy}"
+                    Color="WhiteSmoke"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"></ActivityIndicator>
+                <local:ImageEntry
+                    LineColor="White" IsVisible="False"></local:ImageEntry>
                 <Image Source="userF"></Image>
 
                 <Grid  >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
 
 
 
-                <Frame
+                    <Frame
                     BackgroundColor="Transparent" OutlineColor="Gray" Opacity="0.7" Padding="1" Margin="10"
                  Grid.Row="0"
                     CornerRadius="10">
-                    <Entry
+                        <Entry
                     Text="{Binding UserLoguin.userName,Mode=TwoWay}"
                     x:Name="txtUser"
                     Margin="10"
                     Keyboard="Email"
                     TextColor="White"
-                    Placeholder="Email"
+                    Placeholder="{i18n:Translate emailPH}"
                     PlaceholderColor="White">
-                    </Entry>
-                </Frame>
-                <Frame
+                        </Entry>
+                    </Frame>
+                    <Frame
                     BackgroundColor="Transparent" 
                     OutlineColor="Gray"
                     Opacity="0.7" 
@@ -46,40 +55,43 @@
                          Grid.Row="1"
                     Margin="10"
                     CornerRadius="10">
-                    <Entry
+                        <Entry
                     Text="{Binding UserLoguin.password,Mode=TwoWay}"
                     PlaceholderColor="White"
                     Margin="10"
                     TextColor="White"
                     x:Name="txtPassword"
                     IsPassword="True"
-                    Placeholder="Password" ></Entry>
-                </Frame>
+                    Placeholder="{i18n:Translate passwordPH}" ></Entry>
+                    </Frame>
 
 
-            </Grid>
-            <Grid>
-                <Label Text="Recordar" TextColor="White" Grid.Row="0"
+                </Grid>
+                <Grid>
+                    <Label Text="{i18n:Translate RememberMe}" TextColor="White" Grid.Row="0"
                        Grid.Column="2"></Label>
-                <Switch IsToggled="{Binding RememberMe,Mode=TwoWay}"
+                    <Switch IsToggled="{Binding RememberMe,Mode=TwoWay}"
                         OnColor="SkyBlue"
+                        IsEnabled="{Binding IsEnabled}"
+                        ThumbColor="WhiteSmoke"
                         HorizontalOptions="Center"
                         VerticalOptions="CenterAndExpand" 
                         Grid.Row="0"
                         Grid.Column="3"/>
 
-            </Grid>
+                </Grid>
 
-            <Button
+                <Button
+                  IsEnabled="{Binding IsEnabled}"
                   Command = "{Binding LoginCommand}"
                   Margin="20"
                   BackgroundColor="#3699DE"
                   BorderRadius="23"
-                  Text="Ingresar"
+                  Text="{i18n:Translate LogIn}"
                   TextColor="White">
-            </Button>
+                </Button>
 
-        </StackLayout>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using UISampleApp.Helpers;
+using UISampleApp.Interfaces;
 using UISampleApp.Models;
 using UISampleApp.Services;
 using UISampleApp.Views.Home;
@@ -12,10 +13,43 @@ using Xamarin.Forms;
 
 namespace UISampleApp.ViewModels
 {
-    public class LoginViewModel: NotificationObject 
+    public class LoginViewModel : NotificationObject
     {
 
         #region Propiedades
+        private bool _isBusy;
+
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                _isBusy = value;
+                onPropertyChanged();
+            }
+        }
+
+        private bool _isEnabled;
+
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set
+            {
+                _isEnabled = value;
+                onPropertyChanged();
+            }
+        }
+
+        private ApiClientProfile _clientProfile;
+
+        public ApiClientProfile ClientProfile
+        {
+            get { return _clientProfile; }
+            set { _clientProfile = value; }
+        }
+
+
         private RestServiceConsumer proc;
 
         private Login userLogin;
@@ -46,7 +80,9 @@ namespace UISampleApp.ViewModels
         public Boolean RememberMe
         {
             get { return _rememberMe; }
-            set { _rememberMe = value;
+            set
+            {
+                _rememberMe = value;
                 onPropertyChanged();
             }
         }
@@ -58,17 +94,24 @@ namespace UISampleApp.ViewModels
         #region Constructores
         public LoginViewModel()
         {
+            this.IsEnabled = true;
+            this.IsBusy = false;
             this.UserLoguin = new Login();
             LoginCommand = new Command(LoginCommandExecute);
+            _instance = this;
         }
         #endregion
 
         #region Metodos  y eventos
         public async void LoginCommandExecute()
         {
-
+            await Device.InvokeOnMainThreadAsync(() => {
+                this.IsBusy = true;
+                this.IsEnabled = false;
+            });
+            await Task.Delay(2000);
             /*Logueandome y obteniendo un token*/
-            if (userLogin.password != string.Empty && userLogin.userName != string.Empty)
+            if (userLogin.password != null && userLogin.userName != null)
             {
                 proc = new RestServiceConsumer();
                 var controllerString = $"{Constantes.LOGINAUTH}{Constantes.LOGINAUTHUSERPAR}={userLogin.userName}&{Constantes.LOGINAUTHPASSPAR}={userLogin.password}";
@@ -79,24 +122,69 @@ namespace UISampleApp.ViewModels
                     //Errores en la respuesta
                     if (response.Result == null)
                     {
+                        await Device.InvokeOnMainThreadAsync(() => {
+                            this.IsBusy = false;
+                            this.IsEnabled = true;
+                        });
                         await Application.Current.MainPage.DisplayAlert("Error!", "Credenciales incorrectas", "OK");
                         return;
                     }
                     //Manejo de otros errores
+                    await Device.InvokeOnMainThreadAsync(() => {
+                        this.IsBusy = false;
+                        this.IsEnabled = true;
+                    });
                     await Application.Current.MainPage.DisplayAlert("Error!", response.Message, "OK");
                     return;
                 }
 
                 Settings.SerializedToken = Convert.ToString(response.Result);
                 Settings.IsRemembered = RememberMe;
+
+
+                var profileControllerString = $"{Constantes.CLIENTPROFILE}{Constantes.LOGINAUTHUSERPAR}={userLogin.userName}&{Constantes.LOGINAUTHPASSPAR}={userLogin.password}";
+                var profileResponse = await proc.Get<ApiClientProfile>(Constantes.BASEURL, Constantes.CLIENTPREFIX, profileControllerString, Settings.SerializedToken);
+                if (!profileResponse.IsSuccesFull)
+                {
+                    await Device.InvokeOnMainThreadAsync(() => {
+                        this.IsBusy = false;
+                        this.IsEnabled = true;
+                    });
+                    await Application.Current.MainPage.DisplayAlert("Error!", response.Message, "OK");
+                    return;
+                }
+                ApiClientProfile profileInfo = (ApiClientProfile)profileResponse.Result;
+                this.ClientProfile = profileInfo;
+                Settings.FullName = $"{profileInfo.PrimerNombre} {profileInfo.SegundoNombre} {profileInfo.Apellido} {profileInfo.SegundoApellido}";
+
+
+                await Device.InvokeOnMainThreadAsync(() => {
+                    this.IsBusy = false;
+                    this.IsEnabled = true;
+                });
                 //Navegacion a la pagina Root bloqueando el regreso al Login
                 Application.Current.MainPage = new RootHomePage();
 
             }
             else
             {
+                await Device.InvokeOnMainThreadAsync(() => {
+                    this.IsBusy = false;
+                    this.IsEnabled = true;
+                });
                 await Application.Current.MainPage.DisplayAlert("Error!", "Todos los datos son obligatorios", "OK");
             }
+        }
+        #endregion
+
+        #region Singleton
+        private static LoginViewModel _instance;
+        public static LoginViewModel GetInstance()
+        {
+            if (_instance == null)
+                return new LoginViewModel();
+            else
+                return _instance;
 
         }
         #endregion

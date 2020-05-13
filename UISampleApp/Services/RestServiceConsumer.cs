@@ -14,8 +14,10 @@ namespace UISampleApp.Services
     public class RestServiceConsumer
     {
         /*Metodo para chequear la conexion*/
-        public async Task<Response> CheckConnection() {
-            if (!CrossConnectivity.Current.IsConnected) {
+        public async Task<Response> CheckConnection()
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
                 return new Response()
                 {
                     IsSuccesFull = false,
@@ -24,7 +26,7 @@ namespace UISampleApp.Services
             }
 
 
-            var isReachable = await  CrossConnectivity.Current.IsRemoteReachable("https://www.youtube.com");
+            var isReachable = await CrossConnectivity.Current.IsRemoteReachable("https://www.youtube.com");
             if (!isReachable)
             {
                 return new Response()
@@ -37,13 +39,14 @@ namespace UISampleApp.Services
             return new Response()
             {
                 IsSuccesFull = true,
-                Message="Conexión Correcta"
+                Message = "Conexión Correcta"
             };
 
         }
-        
+
         /*Metodo generico para consumir verbos GET*/
-        public async Task<Response> Get<T>(string baseUrl,string prefix,string controller){
+        public async Task<Response> Get<T>(string baseUrl, string prefix, string controller)
+        {
 
             HttpClient client = new HttpClient();
 
@@ -53,7 +56,8 @@ namespace UISampleApp.Services
                 var url = $"{prefix}{controller}";
                 var response = await client.GetAsync(url);
                 var answer = await response.Content.ReadAsStringAsync();
-                if (!response.IsSuccessStatusCode) {
+                if (!response.IsSuccessStatusCode)
+                {
                     return new Response
                     {
                         IsSuccesFull = false,
@@ -73,17 +77,61 @@ namespace UISampleApp.Services
             catch (Exception ex)
             {
 
-                return new Response {
+                return new Response
+                {
                     IsSuccesFull = false,
                     Message = ex.Message,
                 };
-            }       
+            }
 
         }
         /*Metodo generico para consumir verbos GET que piden TOKEN*/
+        public async Task<Response> Get<T>(string baseUrl, string prefix, string controller, string token)
+        {
 
+            HttpClient client = new HttpClient();
+
+            try
+            {
+
+                client.DefaultRequestHeaders.Clear();
+                client.BaseAddress = new Uri(baseUrl);
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", string.Format("Bearer {0}", CleanToken(token)));
+                var url = $"{prefix}{controller}";
+                var response = await client.GetAsync(url);
+                var answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccesFull = false,
+                        Message = answer,
+                    };
+                }
+
+                var objects = JsonConvert.DeserializeObject<T>(answer);
+
+                return new Response
+                {
+                    IsSuccesFull = true,
+                    Result = objects,
+                };
+
+            }
+            catch (Exception ex)
+            {
+
+                return new Response
+                {
+                    IsSuccesFull = false,
+                    Message = ex.Message,
+                };
+            }
+
+        }
         /*Metodo generico para consumir verbos POST*/
-        public async Task<Response> Post<T>(string baseUrl, string prefix, string controller,T model) {
+        public async Task<Response> Post<T>(string baseUrl, string prefix, string controller, T model)
+        {
             HttpClient client = new HttpClient();
 
             try
@@ -92,7 +140,7 @@ namespace UISampleApp.Services
                 var request = JsonConvert.SerializeObject(model);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var url = $"{prefix}{controller}";
-                var response = await client.PostAsync(url,content);
+                var response = await client.PostAsync(url, content);
                 var answer = await response.Content.ReadAsStringAsync();
                 if (!response.IsSuccessStatusCode)
                 {
@@ -124,6 +172,8 @@ namespace UISampleApp.Services
 
 
         }
+
+
 
         /*Metodos para autenticacion y obtencion de informacion con token*/
         public async Task<T> GetAuth<T>(string url, string token)
@@ -211,6 +261,13 @@ namespace UISampleApp.Services
             }
 
             return string.Empty;
+        }
+
+        private string CleanToken(string token)
+        {
+            var cleanToken = token.Replace('"', ' ');
+            var cleanedToken = cleanToken.Trim();
+            return cleanedToken;
         }
 
     }

@@ -14,11 +14,13 @@ namespace UISampleApp.Models
         static Languages()
         {
             var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-            Resource.Culture= ci;
+            Resource.Culture = ci;
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
 
         public static string Test => Resource.Test;
+        public static string PasswordPH => Resource.passwordPH;
+
 
     }
 }

@@ -14,8 +14,11 @@
             xmlns:models="clr-namespace:UISampleApp.Models"
             android:TabbedPage.IsSmoothScrollEnabled="True"
             android:TabbedPage.IsSwipePagingEnabled="True">
-  <!--Pages can be added as references or inline-->
-    <ContentPage Title="Perfil"  IconImageSource="user96.png" Visual="Material">
+    <!--Pages can be added as references or inline-->
+    <ContentPage Title="Perfil" x:Name="cpProfile" IconImageSource="user96.png" Visual="Material">
+        <ContentPage.BindingContext>
+            <viewmodels:ProfileViewModel></viewmodels:ProfileViewModel>
+        </ContentPage.BindingContext>
         <ScrollView>
             <Grid ColumnSpacing="0" RowSpacing="0">
                 <Grid.RowDefinitions>
@@ -29,10 +32,10 @@
                     <RowDefinition Height="AUTO" />
                 </Grid.RowDefinitions>
 
-               
+
                 <Image Aspect="AspectFill" Source="HeaderBackground.png" />
                 <Image Aspect="Fill" Margin="0,-1,0,-1" Source="CurvedMask.png" VerticalOptions="End" />
-                
+
                 <StackLayout>
                     <Frame CornerRadius="100" 
                        HeightRequest="200"
@@ -40,7 +43,7 @@
                        HorizontalOptions="Center"
                        Padding="0"
                        IsClippedToBounds="True">
-                           <Image Source="ProfilePic.jpg" 
+                        <Image Source="{Binding MyClient.ProfileImage}" 
                            Aspect="Fill"
                            HorizontalOptions="Center"
                            VerticalOptions="Center" />
@@ -49,8 +52,8 @@
 
                 <!--  Profile Name  -->
                 <StackLayout Grid.Row="1" Padding="0,50,0,00" HorizontalOptions="Center">
-                    <Label Style="{StaticResource ProfileNameLabel}" Text="Gerald solano" />
-                    <Label Margin="0,-5" Style="{StaticResource ProfileTagLabel}" Text="chupame_la_katur@gmail.com" />
+                    <Label Style="{StaticResource ProfileNameLabel}" Text="{Binding NombreApellido}" />
+                    <Label Margin="0,-5" Style="{StaticResource ProfileTagLabel}" Text="{Binding MyClient.Email}" />
                 </StackLayout>
 
                 <!--  Social Stats Section  -->
@@ -77,26 +80,26 @@
                     </StackLayout>
                 </Grid>
 
-               
+
                 <StackLayout Orientation="Vertical" Grid.Row="3"   HorizontalOptions="CenterAndExpand" >
-                    <Label Margin="20,0,0,40" VerticalOptions="Start" HorizontalOptions="Center" Grid.Row="3" Style="{StaticResource MainBodyLabel}" Text="Bienvenido Gerald !" />
+                    <Label Margin="20,0,0,40" VerticalOptions="Start" HorizontalOptions="Center" Grid.Row="3" Style="{StaticResource MainBodyLabel}" Text="{Binding MyClient.PrimerNombre,StringFormat='Bienvenido {0} !'}" />
                     <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
                         <StackLayout Orientation="Horizontal">
                             <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Body" Text="Nombre : "></Label>
-                            <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Small" Text="Gerald"></Label>
+                            <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Small" Text="{Binding MyClient.PrimerNombre}"></Label>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Body" Text="Apellido: "></Label>
-                            <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Small" Text="Solano"></Label>
+                            <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Small" Text="{Binding MyClient.Apellido}"></Label>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Body" Text="Fecha de registro : "></Label>
-                            <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Small" x:Name="lblDateRegistered"></Label>
+                            <Label HorizontalOptions="Start" VerticalOptions="Center" FontSize="Small" x:Name="lblDateRegistered" Text="{Binding MyClient.Afiliado,StringFormat=' {0:dd/MM/yyyy} '}"></Label>
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
                 <Button  Grid.Row="4" Margin="20" Style="{StaticResource FollowButton}" Text="Actualizar perfil" Clicked="Button_Clicked"/>
-                
+
             </Grid>
         </ScrollView>
     </ContentPage>
@@ -109,7 +112,7 @@
                 <DataTemplate x:Key="ListViewCategoriesTemplate">
                     <ViewCell  BindingContext="{Binding  rootViewModel}">
 
-                            <Frame    Margin="5,5,5,5" Padding="2" CornerRadius="10" HasShadow="True">
+                        <Frame    Margin="5,5,5,5" Padding="2" CornerRadius="10" HasShadow="True">
                             <AbsoluteLayout IsClippedToBounds="False">
                                 <StackLayout  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"  Orientation="Vertical">
                                     <Image  Source="{Binding Portada}" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1" AbsoluteLayout.LayoutFlags="All" Aspect="AspectFill" HeightRequest="150"   HorizontalOptions="FillAndExpand"  />
@@ -376,7 +379,7 @@
                                                 TextColor="White"></Button>
                                         </StackLayout>
                                         <BoxView Grid.Column="0"  HorizontalOptions="FillAndExpand" Grid.Row="6" HeightRequest="1" Color="LightGray"></BoxView>
-                                            <!--Vista de botonmes de botones de ayuda-->
+                                        <!--Vista de botonmes de botones de ayuda-->
                                         <Grid Grid.Row="7" HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"></RowDefinition>
@@ -419,7 +422,7 @@
         </ContentPage>
         <!--Un dashboard super verga-->
         <ContentPage Title="Resumen"   Visual="Material">
-            
+
         </ContentPage>
     </TabbedPage>
 </TabbedPage>

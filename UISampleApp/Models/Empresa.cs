@@ -6,9 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
+
 namespace UISampleApp.Models
 {
-    public class Empresa 
+    public class Empresa
     {
 
         public int idEmpresa { get; set; }
@@ -18,7 +19,9 @@ namespace UISampleApp.Models
         public string Nombre
         {
             get { return nombre; }
-            set { nombre = value;
+            set
+            {
+                nombre = value;
 
             }
         }
@@ -28,7 +31,9 @@ namespace UISampleApp.Models
         public string Ilustracion
         {
             get { return ilustracion; }
-            set { ilustracion = value;
+            set
+            {
+                ilustracion = value;
 
             }
         }
@@ -38,7 +43,9 @@ namespace UISampleApp.Models
         public string Descripcion
         {
             get { return descripcion; }
-            set { descripcion = value;
+            set
+            {
+                descripcion = value;
 
             }
         }
@@ -48,7 +55,9 @@ namespace UISampleApp.Models
         public DateTime FechaAfiliacion
         {
             get { return fechaAfilacion; }
-            set { fechaAfilacion = value;
+            set
+            {
+                fechaAfilacion = value;
 
             }
         }
@@ -58,7 +67,9 @@ namespace UISampleApp.Models
         public double Estrellas
         {
             get { return estrellas; }
-            set { estrellas = value;
+            set
+            {
+                estrellas = value;
 
             }
         }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UISampleApp.Models;
 
 namespace UISampleApp.Helpers
 {
@@ -21,9 +22,12 @@ namespace UISampleApp.Helpers
         #region Setting Constants
 
         private const string serializedToken = "SerializedToken";
+        private const string logguedInfo = "LogguedInfo";
+        private const string fullName = "FullName";
         private const string isRemenbered = "IsRemembered";
         private static readonly string stringDefault = string.Empty;
         private static readonly bool boolDefault = false;
+
 
         #endregion
 
@@ -40,14 +44,32 @@ namespace UISampleApp.Helpers
             }
         }
 
-        public static bool IsRemembered {
-            get {
-                return AppSettings.GetValueOrDefault(isRemenbered,boolDefault);
+        public static bool IsRemembered
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(isRemenbered, boolDefault);
             }
-            set {
+            set
+            {
                 AppSettings.AddOrUpdateValue(isRemenbered, value);
             }
         }
+
+        public static string FullName
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(fullName, stringDefault);
+            }
+
+            set
+            {
+                AppSettings.AddOrUpdateValue(fullName, value);
+            }
+        }
+
+
 
     }
 }

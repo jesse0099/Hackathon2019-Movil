@@ -10,7 +10,7 @@ namespace UISampleApp.Models
     {
         #region Acceso a la Api
         //public  static  string BASEURL = "https://eecommerapi.conveyor.cloud/";
-        public const string BASEURL = "http://192.168.43.184:45455/";
+        public const string BASEURL = "http://192.168.100.33:45455/";
         public const string COMMEPREFIX = "/api/comme";
         public const string COMMEGETBYCAT = "/getByCat?category=";
         public const string COMMEGETSUCBYCOMME = "/getSucByCommer?idCommer=";
@@ -22,6 +22,10 @@ namespace UISampleApp.Models
         public const string LOGINAUTH = "/loginClient?";
         public const string LOGINAUTHUSERPAR = "user";
         public const string LOGINAUTHPASSPAR = "password";
+
+        public const string CLIENTPREFIX = "api/clients";
+        public const string CLIENTPROFILE = "/profileInfoByAuth?";
+
         #endregion
 
         #region Creacion y configuracion de la BD local
@@ -34,7 +38,7 @@ namespace UISampleApp.Models
             //Crea la base de datos si no existe
             SQLite.SQLiteOpenFlags.Create |
             //Admite acceso multi hilo a la base de datos
-            SQLite.SQLiteOpenFlags.SharedCache ;
+            SQLite.SQLiteOpenFlags.SharedCache;
 
         #endregion
 

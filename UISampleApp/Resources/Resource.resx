@@ -120,4 +120,16 @@
   <data name="Test" xml:space="preserve">
     <value>Test</value>
   </data>
+  <data name="passwordPH" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="emailPH" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
 </root>

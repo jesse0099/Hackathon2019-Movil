@@ -59,6 +59,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api Models\ApiClientProfile.cs" />
     <Compile Include="Api Models\ApiProducto.cs" />
     <Compile Include="Api Models\ApiSucursal.cs" />
     <Compile Include="App.xaml.cs">
@@ -73,6 +74,7 @@
     <Compile Include="Api Models\ApiInventarioSucursal.cs" />
     <Compile Include="Interfaces\ILocalize.cs" />
     <Compile Include="Interfaces\ISQLitePlatform.cs" />
+    <Compile Include="Models\ClientProfile.cs" />
     <Compile Include="Models\GroupedProducts.cs" />
     <Compile Include="Models\InventarioSucursal.cs" />
     <Compile Include="Models\ClientProfileResponse.cs" />
