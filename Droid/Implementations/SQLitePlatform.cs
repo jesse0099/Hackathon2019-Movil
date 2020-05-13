@@ -2,6 +2,7 @@
 using System.IO;
 using Android.OS;
 using SQLite;
+using SQLitePCL;
 using UISampleApp.Interfaces;
 using UISampleApp.Models;
 
@@ -19,6 +20,7 @@ namespace UISampleApp.Droid.Implementations
 
         public SQLiteConnection GetConnection()
         {
+
             return new SQLiteConnection(GetPath());
         }
 

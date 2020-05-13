@@ -8,6 +8,8 @@ using UISampleApp.Services;
 using UISampleApp.Views.Home;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SQLite;
+using UISampleApp.Interfaces;
 
 namespace UISampleApp.Views.Logins
 {
@@ -19,7 +21,8 @@ namespace UISampleApp.Views.Logins
 		public PaginaGeraldLogin ()
 		{
 			InitializeComponent ();
-		}
+
+        }
 
 
 

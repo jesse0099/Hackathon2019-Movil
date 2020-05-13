@@ -81,7 +81,49 @@ namespace UISampleApp.Services
 
         }
         /*Metodo generico para consumir verbos GET que piden TOKEN*/
+        public async Task<Response> Get<T>(string baseUrl, string prefix, string controller,string token)
+        {
 
+            HttpClient client = new HttpClient();
+
+            try
+            {
+
+                client.DefaultRequestHeaders.Clear();
+                client.BaseAddress = new Uri(baseUrl);
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", string.Format("Bearer {0}", CleanToken(token)));
+                var url = $"{prefix}{controller}";
+                var response = await client.GetAsync(url);
+                var answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccesFull = false,
+                        Message = answer,
+                    };
+                }
+
+                var objects = JsonConvert.DeserializeObject<T>(answer);
+
+                return new Response
+                {
+                    IsSuccesFull = true,
+                    Result = objects,
+                };
+
+            }
+            catch (Exception ex)
+            {
+
+                return new Response
+                {
+                    IsSuccesFull = false,
+                    Message = ex.Message,
+                };
+            }
+
+        }
         /*Metodo generico para consumir verbos POST*/
         public async Task<Response> Post<T>(string baseUrl, string prefix, string controller,T model) {
             HttpClient client = new HttpClient();
@@ -124,6 +166,8 @@ namespace UISampleApp.Services
 
 
         }
+
+
 
         /*Metodos para autenticacion y obtencion de informacion con token*/
         public async Task<T> GetAuth<T>(string url, string token)
@@ -211,6 +255,12 @@ namespace UISampleApp.Services
             }
 
             return string.Empty;
+        }
+
+        private string CleanToken(string token) {
+            var cleanToken = token.Replace('"', ' ');
+            var cleanedToken = cleanToken.Trim();
+            return cleanedToken;
         }
 
     }

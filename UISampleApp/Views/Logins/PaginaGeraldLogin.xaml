@@ -6,12 +6,21 @@
              x:Class="UISampleApp.Views.Logins.PaginaGeraldLogin"
              NavigationPage.HasNavigationBar="false"
              x:Name="PaginaLogin"
+             xmlns:local="clr-namespace:UISampleApp.Controls"
              BindingContext="{Binding Main ,Source={StaticResource Locator}}">
 
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="10,20,10,5"  BackgroundColor="#0D0937"
                      BindingContext="{Binding Login}">
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding IsBusy}"
+                    Color="WhiteSmoke"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"></ActivityIndicator>
+                <local:ImageEntry
+                    LineColor="White" IsVisible="False"></local:ImageEntry>
                 <Image Source="userF"></Image>
 
                 <Grid  >
@@ -34,7 +43,7 @@
                     Margin="10"
                     Keyboard="Email"
                     TextColor="White"
-                    Placeholder="Email"
+                    Placeholder="{i18n:Translate emailPH}"
                     PlaceholderColor="White">
                     </Entry>
                 </Frame>
@@ -53,16 +62,18 @@
                     TextColor="White"
                     x:Name="txtPassword"
                     IsPassword="True"
-                    Placeholder="Password" ></Entry>
+                    Placeholder="{i18n:Translate passwordPH}" ></Entry>
                 </Frame>
 
 
             </Grid>
             <Grid>
-                <Label Text="Recordar" TextColor="White" Grid.Row="0"
+                <Label Text="{i18n:Translate RememberMe}" TextColor="White" Grid.Row="0"
                        Grid.Column="2"></Label>
                 <Switch IsToggled="{Binding RememberMe,Mode=TwoWay}"
                         OnColor="SkyBlue"
+                        IsEnabled="{Binding IsEnabled}"
+                        ThumbColor="WhiteSmoke"
                         HorizontalOptions="Center"
                         VerticalOptions="CenterAndExpand" 
                         Grid.Row="0"
@@ -71,11 +82,12 @@
             </Grid>
 
             <Button
+                  IsEnabled="{Binding IsEnabled}"
                   Command = "{Binding LoginCommand}"
                   Margin="20"
                   BackgroundColor="#3699DE"
                   BorderRadius="23"
-                  Text="Ingresar"
+                  Text="{i18n:Translate LogIn}"
                   TextColor="White">
             </Button>
 

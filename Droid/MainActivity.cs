@@ -11,9 +11,10 @@ using Plugin.CurrentActivity;
 using Rg.Plugins.Popup;
 using Rg.Plugins.Popup.Services;
 
+
 namespace UISampleApp.Droid
 {
- 
+
     [Activity(Label = "UISampleApp.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {

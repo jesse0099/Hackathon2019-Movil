@@ -36,9 +36,6 @@ namespace UISampleApp.Views.Home
             this.UnselectedTabColor = Color.White;
 
             
-
-            lblDateRegistered.Text = string.Format("{0:t}",DateTime.Now.ToString());
-
             //LecturaMensajes
             MessagingCenter.Subscribe<RootExplorePageViewModel>(this, "Goto",(a)=> {
                 //Iniciar navegacion en el stack

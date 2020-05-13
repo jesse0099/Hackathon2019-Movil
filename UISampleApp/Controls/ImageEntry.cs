@@ -8,7 +8,8 @@ namespace UISampleApp.Controls
         public  ImageEntry(){
             this.HeightRequest = 50;
         }
-		public static readonly BindableProperty ImageProperty =
+
+        public static readonly BindableProperty ImageProperty =
             BindableProperty.Create(nameof(Image), typeof(string), typeof(ImageEntry), string.Empty);
 
 		public static readonly BindableProperty LineColorProperty =
@@ -23,7 +24,8 @@ namespace UISampleApp.Controls
 		public static readonly BindableProperty ImageAlignmentProperty =
 			BindableProperty.Create(nameof(ImageAlignment), typeof(ImageAlignment), typeof(ImageEntry), ImageAlignment.Left);
 
-		public Color LineColor
+
+        public Color LineColor
 		{
 			get { return (Color)GetValue(LineColorProperty); }
 			set { SetValue(LineColorProperty, value); }

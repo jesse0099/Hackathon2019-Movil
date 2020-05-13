@@ -120,4 +120,16 @@
   <data name="Test" xml:space="preserve">
     <value>Prueba</value>
   </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Ingresar</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Recuerdame</value>
+  </data>
+  <data name="passwordPH" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="emailPH" xml:space="preserve">
+    <value>Email</value>
+  </data>
 </root>

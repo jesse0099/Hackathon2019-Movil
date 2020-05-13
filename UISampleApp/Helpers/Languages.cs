@@ -19,6 +19,8 @@ namespace UISampleApp.Models
         }
 
         public static string Test => Resource.Test;
+        public static string PasswordPH => Resource.passwordPH;
+
 
     }
 }
