@@ -6,6 +6,7 @@ namespace UISampleApp
     using Xamarin.Forms;
     using UISampleApp.Views.SignUps;
     using UISampleApp.Views.Logins;
+    using UISampleApp.Views.UpdateInfoUser;
     using UISampleApp.Views.Home;
     using UISampleApp.Helpers;
     using UISampleApp.Services;

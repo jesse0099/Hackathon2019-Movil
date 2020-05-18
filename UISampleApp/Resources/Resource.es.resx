@@ -132,4 +132,41 @@
   <data name="RememberMe" xml:space="preserve">
     <value>Recuerdame</value>
   </data>
+  <data name="nameToolTip" xml:space="preserve">
+    <value>Escribe ambos nombres separados por un espacio.
+Ej: Jese Chavez </value>
+  </data>
+  <data name="permissionRequired" xml:space="preserve">
+    <value>Se requieren permisos.</value>
+  </data>
+  <data name="givenNameTltip" xml:space="preserve">
+    <value>Escriba ambos apellidos separados por un espacio.
+Ej: Chavez Rivas.</value>
+  </data>
+  <data name="signin" xml:space="preserve">
+    <value>Inicio de Sesión</value>
+  </data>
+  <data name="passwordsshouldmatch" xml:space="preserve">
+    <value>Las contraseñas deben coincidir.</value>
+  </data>
+  <data name="updatedProfile" xml:space="preserve">
+    <value>Perfil actualizado.</value>
+  </data>
+  <data name="alldataNeeded" xml:space="preserve">
+    <value>Datos insuficientes.</value>
+  </data>
+  <data name="wrongWrittenNames" xml:space="preserve">
+    <value>Escriba ambos nombres separados por un espacio.
+Ej: Jese Chavez.</value>
+  </data>
+  <data name="wrongWrittenGivenNames" xml:space="preserve">
+    <value>Escriba ambos apellidos separados por un espacio.
+Ej: Chavez Rivas.</value>
+  </data>
+  <data name="PasswordsNomatch." xml:space="preserve">
+    <value>Las contraseñas no coinciden.</value>
+  </data>
+  <data name="wrongPassword" xml:space="preserve">
+    <value>Contraseña incorrecta.</value>
+  </data>
 </root>

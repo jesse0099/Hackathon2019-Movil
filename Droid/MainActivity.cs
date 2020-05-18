@@ -10,6 +10,7 @@ using Android.OS;
 using Plugin.CurrentActivity;
 using Rg.Plugins.Popup;
 using Rg.Plugins.Popup.Services;
+using UISampleApp.Interfaces;
 
 namespace UISampleApp.Droid
 {
@@ -17,13 +18,18 @@ namespace UISampleApp.Droid
     [Activity(Label = "UISampleApp.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        private Bundle savedInstanceState = null;
+
         protected override void OnCreate(Bundle bundle)
         {
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-
+            savedInstanceState = bundle;
+            //Inicializar Xamarin Essential
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             //Inicializacion de RG.Plugin
@@ -31,7 +37,7 @@ namespace UISampleApp.Droid
 
             //Cambio de color de la barra de estado
             Window.SetStatusBarColor(Android.Graphics.Color.ParseColor("#0a0a0a"));
-          
+
             LoadApplication(new App());
         }
 
@@ -44,6 +50,19 @@ namespace UISampleApp.Droid
             else {
                 //Nada en el stack de popups
             }
+        }
+
+        public override void OnSaveInstanceState(Bundle outState, PersistableBundle outPersistentState)
+        {
+            this.savedInstanceState = outState;
+            base.OnSaveInstanceState(outState, outPersistentState);
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

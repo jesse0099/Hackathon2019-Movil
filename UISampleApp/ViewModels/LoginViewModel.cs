@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -109,7 +110,6 @@ namespace UISampleApp.ViewModels
                 this.IsBusy = true;
                 this.IsEnabled = false;
             });
-            await Task.Delay(2000);
             /*Logueandome y obteniendo un token*/
             if (userLogin.password != null && userLogin.userName != null)
             {
@@ -137,11 +137,11 @@ namespace UISampleApp.ViewModels
                     await Application.Current.MainPage.DisplayAlert("Error!", response.Message, "OK");
                     return;
                 }
-
+                //Settings
                 Settings.SerializedToken = Convert.ToString(response.Result);
                 Settings.IsRemembered = RememberMe;
 
-
+                //Informacion de perdil
                 var profileControllerString = $"{Constantes.CLIENTPROFILE}{Constantes.LOGINAUTHUSERPAR}={userLogin.userName}&{Constantes.LOGINAUTHPASSPAR}={userLogin.password}";
                 var profileResponse = await proc.Get<ApiClientProfile>(Constantes.BASEURL, Constantes.CLIENTPREFIX, profileControllerString, Settings.SerializedToken);
                 if (!profileResponse.IsSuccesFull)
@@ -155,8 +155,25 @@ namespace UISampleApp.ViewModels
                 }
                 ApiClientProfile profileInfo = (ApiClientProfile)profileResponse.Result;
                 this.ClientProfile = profileInfo;
-                Settings.FullName = $"{profileInfo.PrimerNombre} {profileInfo.SegundoNombre} {profileInfo.Apellido} {profileInfo.SegundoApellido}";
+                
+                #region Carga de datos a otros ViewModels
+                UpdateProfileViewModel.GetInstance().Nombres = $"{profileInfo.PrimerNombre} {profileInfo.SegundoNombre}";
+                UpdateProfileViewModel.GetInstance().Apellidos = $"{profileInfo.Apellido} {profileInfo.SegundoApellido}";
+                UpdateProfileViewModel.GetInstance().Profile.Email = $"{profileInfo.Email}";
 
+                var profileImageBytes = Convert.FromBase64String(Convert.ToString(profileInfo.PP));
+                ImageSource profileImage;
+                if (profileImageBytes.Length != 0)
+                    profileImage = ImageSource.FromStream(() => new MemoryStream(profileImageBytes));
+                else
+                    profileImage = ImageSource.FromFile("userF.png");
+                UpdateProfileViewModel.GetInstance().Profile.ProfileImage = profileImage;
+                #endregion
+
+                //Settings
+                Settings.FullName = $"{profileInfo.PrimerNombre} {profileInfo.SegundoNombre} {profileInfo.Apellido} {profileInfo.SegundoApellido}";
+                Settings.ClientUID = profileInfo.ID;
+                Settings.SuccesfullPassword = userLogin.password;
 
                 await Device.InvokeOnMainThreadAsync(() => {
                     this.IsBusy = false;

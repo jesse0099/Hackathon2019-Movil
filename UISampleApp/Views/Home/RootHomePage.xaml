@@ -272,7 +272,6 @@
                                                 <RowDefinition Height="150"></RowDefinition>
                                             </Grid.RowDefinitions>
 
-
                                             <Image Grid.Row="0" 
                                                Aspect="AspectFill"
                                                IsOpaque="True"

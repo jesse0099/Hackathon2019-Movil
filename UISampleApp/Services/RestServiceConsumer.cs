@@ -172,6 +172,47 @@ namespace UISampleApp.Services
 
 
         }
+        /*Metodo generico para consumir verbos PUT que requieren TOKEN*/
+        public async Task<Response> Put<T>(string baseUrl, string prefix, string controller, T model,string token) {
+            HttpClient client = new HttpClient();
+            try {
+
+                client.DefaultRequestHeaders.Clear();
+                client.BaseAddress = new Uri(baseUrl);
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", string.Format("Bearer {0}", CleanToken(token)));
+                var request = JsonConvert.SerializeObject(model);
+                var content = new StringContent(request,Encoding.UTF8, "application/json");
+                var url = $"{prefix}{controller}";
+                var response = await client.PutAsync(url,content);
+                var answer = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccesFull = false,
+                        Message = answer,
+                    };
+                }
+
+                var objects = JsonConvert.DeserializeObject<T>(answer);
+
+                return new Response
+                {
+                    IsSuccesFull = true,
+                    Result = objects,
+                };
+            }
+            catch (Exception ex) {
+                return new Response
+                {
+                    IsSuccesFull = false,
+                    Message = ex.Message,
+                };
+            }
+
+        }
+
+
 
 
 

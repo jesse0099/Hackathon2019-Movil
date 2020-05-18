@@ -5,7 +5,7 @@ namespace UISampleApp.Effects
 {
     public class BackgroundEntryEffect : RoutingEffect
     {
-        public BackgroundEntryEffect() : base("MyCompany.BackgroundEffect")
+        public BackgroundEntryEffect() : base("YoniEffects.BackgroundEffect")
         {
         }
     }

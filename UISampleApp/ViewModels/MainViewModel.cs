@@ -14,9 +14,11 @@ namespace UISampleApp.ViewModels
         public EnterprisePageViewModel  Enterprises { get; set; }
         public LoginViewModel Login { get; set; }
         public RootExplorePageViewModel rootViewModel { get; set; }
+        public UpdateProfileViewModel UpdateProfile { get; set; }
 
         public MainViewModel() {
 
+            this.UpdateProfile = new UpdateProfileViewModel();
             this.Inventario = new InventarioPageViewModel();
             this.RootExplorer = new RootExplorePageViewModel();
             this.Login = new LoginViewModel();

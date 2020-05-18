@@ -6,7 +6,8 @@ using UISampleApp.Effects;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ResolutionGroupName("MyCompany")]
+
+[assembly: ResolutionGroupName("YoniEffects")]
 [assembly: ExportEffect(typeof(DroidBackgroundEntryEffect), "BackgroundEffect")]
 namespace UISampleApp.Droid.Effects
 {

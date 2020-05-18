@@ -31,5 +31,10 @@ namespace UISampleApp.Views.Logins
             return true;
         }
 
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            //Reconocimiento de Gestos 
+
+        }
     }
 }

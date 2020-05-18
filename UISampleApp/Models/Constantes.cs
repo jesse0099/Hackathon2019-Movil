@@ -25,6 +25,8 @@ namespace UISampleApp.Models
 
         public const string CLIENTPREFIX = "api/clients";
         public const string CLIENTPROFILE = "/profileInfoByAuth?";
+        public const string CLIENTUPDATEPROFILE = "/UpdateClientProfile";
+        public const string CLIENTUPDATECREDENTIALS = "/UpdateClientCredentials";
 
         #endregion
 

@@ -9,7 +9,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 	<ContentPage.Content>
-        <ScrollView>
+
             <StackLayout Padding="40" Spacing="10">
                  <Label  HorizontalOptions="CenterAndExpand" 
                               Text="UiApp" 
@@ -48,6 +48,6 @@
                       </Label.GestureRecognizers>
                   </Label>
              </StackLayout>
-        </ScrollView>
+
 	</ContentPage.Content>
 </ContentPage>

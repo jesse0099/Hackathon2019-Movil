@@ -13,6 +13,9 @@
         <ScrollView>
             <StackLayout Padding="10,20,10,5"  BackgroundColor="#0D0937"
                      BindingContext="{Binding Login}">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
                 <ActivityIndicator
                     IsRunning="{Binding IsBusy}"
                     IsVisible="{Binding IsBusy}"
@@ -21,7 +24,8 @@
                     VerticalOptions="Center"></ActivityIndicator>
                 <local:ImageEntry
                     LineColor="White" IsVisible="False"></local:ImageEntry>
-                <Image Source="userF"></Image>
+                <Image Source="userF">
+                </Image>
 
                 <Grid  >
                     <Grid.RowDefinitions>
@@ -90,7 +94,6 @@
                   Text="{i18n:Translate LogIn}"
                   TextColor="White">
                 </Button>
-
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

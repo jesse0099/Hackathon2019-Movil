@@ -8,6 +8,7 @@ namespace UISampleApp.Models
 {
     public class ApiClientProfile
     {
+        public int ID { get; set; }
         public string PrimerNombre { get; set; }
         public string SegundoNombre { get; set; }
         public string Apellido { get; set; }
