@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Realm.4.0.0\build\Realm.props" Condition="Exists('..\packages\Realm.4.0.0\build\Realm.props')" />
   <Import Project="..\packages\Xamarin.Forms.4.3.0.908675\build\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.4.3.0.908675\build\Xamarin.Forms.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -310,6 +311,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Xamarin.Forms.4.3.0.908675\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.4.3.0.908675\build\Xamarin.Forms.props'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Forms.4.3.0.908675\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.4.3.0.908675\build\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('..\packages\Realm.4.0.0\build\Realm.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Realm.4.0.0\build\Realm.props'))" />
   </Target>
   <Import Project="..\packages\Xamarin.Forms.4.3.0.908675\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.4.3.0.908675\build\Xamarin.Forms.targets')" />
 </Project>
